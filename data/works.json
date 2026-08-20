@@ -1,0 +1,55 @@
+[
+  {
+    "id": "personal-universe",
+    "index": "01",
+    "type": "web",
+    "name": "个人网站",
+    "nameEn": "Personal Universe",
+    "eyebrow": "从桌面主页到可探索的个人世界",
+    "eyebrowEn": "From a desktop homepage to an explorable personal world",
+    "description": "个人网站做过两个版本：V1 是最开始的样子，V2 加入了窗口、食蜂操祈和更多互动。",
+    "descriptionEn": "Two generations of the same personal expression project: V1 preserves the beginning, while V2 turns windows, memories, a character and interactions into one experience.",
+    "tech": ["HTML", "CSS", "JavaScript", "Three.js", "VRM"],
+    "versions": [
+      { "label": "V1 · ORIGIN", "note": "Windows 桌面 / 粒子连线 / 2025", "noteEn": "Windows desktop / particle links / 2025", "url": "https://yuban834.github.io/paperframe-website-v1/" },
+      { "label": "V2 · CURRENT", "note": "沉浸式 OS / 角色与记忆系统 / 2026", "noteEn": "Immersive OS / character and memory systems / 2026", "url": "index.html" }
+    ],
+    "links": [
+      { "label": "进入当前版本", "labelEn": "Open current version", "url": "index.html", "kind": "primary" },
+      { "label": "V1 源码", "labelEn": "V1 source", "url": "https://github.com/YuBan834/paperframe-website-v1", "kind": "secondary" }
+    ]
+  },
+  {
+    "id": "vrma-lab",
+    "index": "02",
+    "type": "tool",
+    "name": "VRMA Lab",
+    "nameEn": "VRMA Lab",
+    "eyebrow": "面向人类与 Agent 的本地动作工作台",
+    "eyebrowEn": "A local motion workspace for humans and agents",
+    "description": "在浏览器中导入 VRM、FBX 与 VRMA，调整骨骼、表情和视线，并通过结构化 Agent 模式完成动作修正与导出。",
+    "descriptionEn": "Import VRM, FBX and VRMA in the browser, tune bones, expressions and gaze, then refine and export motion through a structured Agent mode.",
+    "tech": ["React", "Three.js", "VRM", "VRMA", "Agent UI"],
+    "metrics": ["LOCAL FIRST", "MOTION EDIT", "AGENT MODE"],
+    "links": [
+      { "label": "在线体验", "labelEn": "Live demo", "url": "https://yuban834.github.io/vrma-lab/", "kind": "primary" },
+      { "label": "GitHub", "labelEn": "GitHub", "url": "https://github.com/YuBan834/vrma-lab", "kind": "secondary" }
+    ]
+  },
+  {
+    "id": "star-focus",
+    "index": "03",
+    "type": "game",
+    "name": "Star Focus",
+    "nameEn": "Star Focus",
+    "eyebrow": "把专注过程变成可以玩的星际任务",
+    "eyebrowEn": "Turning focus sessions into playable star missions",
+    "description": "把专注过程做成游戏，完成任务时会得到更直观的反馈。",
+    "descriptionEn": "A gamified experiment around focus, rhythm and feedback. Every completed session becomes a visible voyage instead of another number in a table.",
+    "tech": ["Godot", "Game Design", "Pixel UI", "Productivity"],
+    "metrics": ["FOCUS LOOP", "STAR MAP", "PLAYABLE"],
+    "links": [
+      { "label": "查看项目", "labelEn": "View project", "url": "https://github.com/YuBan834/star-focus", "kind": "primary" }
+    ]
+  }
+]

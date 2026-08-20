@@ -1,0 +1,84 @@
+{
+  "version": "2.0",
+  "status": "ACTIVE / EVOLVING",
+  "headline": "这是我的个人网站，以后还会继续更新。",
+  "headlineEn": "Not a template, but a personal expression kept in motion.",
+  "intro": "这里放着我做过的项目、看过的番、玩过的游戏，还有一只能互动的食蜂操祈。",
+  "introEn": "PaperFrame's personal website experiment, bringing projects, media memories, technical learning and a Shokuhou Misaki character interface into one browser space.",
+  "facts": [
+    { "label": "站点作者", "labelEn": "CREATOR", "value": "开发者纸帧 / PaperFrame" },
+    { "label": "当前版本", "labelEn": "VERSION", "value": "V2.0" },
+    { "label": "项目形态", "labelEn": "FORMAT", "value": "PERSONAL WEB EXPERIMENT" },
+    { "label": "主要技术", "labelEn": "STACK", "value": "HTML · CSS · JS · NODE · THREE.JS · VRM" }
+  ],
+  "eras": [
+    {
+      "version": "V1.0",
+      "year": "2025",
+      "mode": "HANDCRAFTED",
+      "title": "从空白文件开始",
+      "titleEn": "Started from a blank file",
+      "description": "第一版由 PaperFrame 纯手工编写。Windows 桌面、粒子连线、个人信息窗口和留言表单，记录了这个项目最初、直接而真实的样子。",
+      "descriptionEn": "V1.0 was written manually by PaperFrame. Its Windows desktop, particle links, profile window and message form preserve the project's earliest and most direct form.",
+      "accent": "#4ca8ff",
+      "link": "https://yuban834.github.io/paperframe-website-v1/",
+      "linkLabel": "访问 V1.0",
+      "linkLabelEn": "OPEN V1.0"
+    },
+    {
+      "version": "V2.0",
+      "year": "2026",
+      "mode": "AI AGENT ASSISTED",
+      "title": "从网页扩展成个人世界",
+      "titleEn": "Expanded into a personal world",
+      "description": "第二版由 PaperFrame 负责方向、审美、内容与最终决策，并使用 AI Agent 辅助代码重构、测试和迭代。AI 是开发工具，网站表达与取舍仍来自作者本人。",
+      "descriptionEn": "PaperFrame directs the visual language, content and final decisions of V2.0, with AI agents assisting code refactoring, testing and iteration. AI is a development tool; the expression and choices remain the creator's.",
+      "accent": "#f2c66d",
+      "link": "https://github.com/YuBan834",
+      "linkLabel": "查看开发者主页",
+      "linkLabelEn": "OPEN GITHUB"
+    }
+  ],
+  "motion": {
+    "title": "食蜂操祈的动作是怎么做的？",
+    "titleEn": "Motion is not simply downloaded and played.",
+    "description": "角色动作先在我做的 VRMA Lab 里调整骨骼、节奏、视线和表情，调好以后再放进网站。",
+    "descriptionEn": "The site's VRMA motions are selected and refined in PaperFrame's VRMA Lab—bones, timing, gaze and expressions are tuned before integration through the character state machine.",
+    "steps": [
+      { "index": "01", "name": "动作筛选", "nameEn": "SELECT" },
+      { "index": "02", "name": "VRMA Lab 调整", "nameEn": "REFINE" },
+      { "index": "03", "name": "表情与视线", "nameEn": "EXPRESS" },
+      { "index": "04", "name": "网站状态机", "nameEn": "INTEGRATE" }
+    ],
+    "link": "https://github.com/YuBan834/vrma-lab"
+  },
+  "credits": [
+    {
+      "role": "CHARACTER VRM MODEL",
+      "name": "とある科学の超電磁砲　食蜂操祈",
+      "author": "模型作者：のーり",
+      "authorEn": "Model creator: のーり",
+      "note": "作者信息取自 VRM 内嵌元数据。模型许可标记为禁止再分发；V2.0 公开部署前必须另行取得授权或替换模型。",
+      "noteEn": "Creator credit is read from embedded VRM metadata. Redistribution is marked as disallowed; permission or a replacement model is required before a public V2.0 release.",
+      "state": "CREDITED / LICENSE REVIEW"
+    },
+    {
+      "role": "MOTION WORKFLOW",
+      "name": "VRMA Lab",
+      "author": "开发与动作调整：PaperFrame",
+      "authorEn": "Development and motion refinement: PaperFrame",
+      "note": "动作文件的公开再发布条款将在 V2.0 发布前逐项确认。",
+      "noteEn": "Redistribution terms for each motion file will be confirmed before V2.0 is released.",
+      "state": "LOCAL MOTION WORKSPACE"
+    },
+    {
+      "role": "RUNTIME",
+      "name": "Three.js / @pixiv/three-vrm",
+      "author": "开源运行时组件",
+      "authorEn": "Open-source runtime components",
+      "note": "用于浏览器三维渲染、VRM 加载和角色控制。",
+      "noteEn": "Used for browser rendering, VRM loading and character control.",
+      "state": "OPEN SOURCE"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <title>PaperFrame // 访问票检票</title>
+  <link rel="stylesheet" href="/css/ticket-verify.css?v=20260820-ticket2">
+</head>
+<body class="ticket-gate-page">
+  <main class="ticket-gate">
+    <header class="ticket-gate-brand">
+      <div class="ticket-gate-mark" aria-hidden="true">05</div>
+      <div>
+        <strong>PAPERFRAME</strong>
+        <span>DIGITAL VISITOR GATE</span>
+      </div>
+      <i id="gate-system-state">STANDBY</i>
+    </header>
+
+    <section class="ticket-gate-stage">
+      <div class="ticket-gate-copy">
+        <p>ACADEMY CITY / SECTOR 07</p>
+        <h1>访问票<br>真实性核验</h1>
+        <span>导入票面二维码截图，或输入票面底部的三段校验码。</span>
+      </div>
+
+      <div class="ticket-gate-control">
+      <form id="gate-verify-form" class="ticket-gate-form">
+        <label for="gate-credential">TICKET CREDENTIAL</label>
+        <div>
+          <input id="gate-credential" type="text" maxlength="14" autocomplete="off"
+                 spellcheck="false" placeholder="XXXX-XXXX-XXXX" aria-describedby="gate-message">
+          <button type="submit">VERIFY <span>↗</span></button>
+        </div>
+        <p id="gate-message" aria-live="polite">等待访问凭证。</p>
+      </form>
+
+      <div class="ticket-gate-import">
+        <button id="gate-import-button" type="button">IMPORT QR IMAGE <span>↗</span></button>
+        <small>二维码图片仅在本地解析，不会上传。</small>
+        <input id="gate-import-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+      </div>
+
+      <article id="gate-result" class="ticket-gate-result" data-state="idle" aria-live="polite">
+        <div class="ticket-gate-scan" aria-hidden="true"></div>
+        <header>
+          <span id="gate-result-label">NO SIGNAL</span>
+          <strong id="gate-result-number">NO.-----</strong>
+        </header>
+        <dl>
+          <div><dt>ISSUED TO</dt><dd id="gate-result-name">—</dd></div>
+          <div><dt>EDITION</dt><dd id="gate-result-style">—</dd></div>
+          <div><dt>ISSUED AT</dt><dd id="gate-result-date">—</dd></div>
+          <div><dt>CREDENTIAL</dt><dd id="gate-result-credential">—</dd></div>
+        </dl>
+      </article>
+      </div>
+    </section>
+
+    <footer class="ticket-gate-footer">
+      <span>SERVER VERIFIED / NOT A BLOCKCHAIN ASSET</span>
+      <a href="/">返回 PaperFrame 个人网站</a>
+    </footer>
+  </main>
+  <script src="/vendor/jsqr/jsQR.js?v=1.4.0"></script>
+  <script src="/js/ticket-qr-import.js?v=20260820-ticket1"></script>
+  <script src="/js/ticket-gate.js?v=20260820-ticket2"></script>
+</body>
+</html>

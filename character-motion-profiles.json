@@ -1,0 +1,609 @@
+{
+  "version": 1,
+  "model": "shokuhou.vrm",
+  "idleMotion": null,
+  "profileRevision": 8,
+  "motions": {
+    "Angry.vrma": {
+      "displayName": "傲娇生气",
+      "displayNameEn": "Tsundere Anger",
+      "loop": false,
+      "speed": 0.9,
+      "trimStart": 0.9,
+      "trimEnd": 7.35,
+      "fadeIn": 0.42,
+      "fadeOut": 0.55,
+      "idleBefore": 0.35,
+      "idleAfter": 0.8,
+      "autoReturn": true,
+      "bodyWeights": {
+        "head": 95,
+        "neck": 95,
+        "chest": 98,
+        "spine": 98,
+        "hips": 100,
+        "leftArm": 98,
+        "rightArm": 98,
+        "leftHand": 100,
+        "rightHand": 100,
+        "leftLeg": 100,
+        "rightLeg": 100,
+        "leftFoot": 100,
+        "rightFoot": 100
+      },
+      "rootMotion": {
+        "horizontal": false,
+        "vertical": true,
+        "forward": false,
+        "rotation": true,
+        "inPlace": true
+      },
+      "gazeTarget": "user",
+      "gazeEvents": [
+        {
+          "time": 0.7,
+          "target": "left"
+        },
+        {
+          "time": 4.9,
+          "target": "user"
+        }
+      ],
+      "expressions": [
+        {
+          "time": 0.08,
+          "expression": "angry",
+          "weight": 0.44,
+          "attack": 0.32,
+          "hold": 4.65,
+          "release": 0.75,
+          "easing": "easeInOut"
+        },
+        {
+          "time": 0.18,
+          "expression": "ou",
+          "weight": 0.08,
+          "attack": 0.35,
+          "hold": 4.1,
+          "release": 0.65,
+          "easing": "easeInOut"
+        },
+        {
+          "time": 4.75,
+          "expression": "happy",
+          "weight": 0.07,
+          "attack": 0.35,
+          "hold": 0.7,
+          "release": 0.45,
+          "easing": "easeInOut"
+        }
+      ],
+      "blink": {
+        "enabled": true,
+        "interval": 4.8,
+        "randomRange": 1.2,
+        "speed": 0.14,
+        "doubleBlinkChance": 0.08
+      },
+      "review": {
+        "status": "pending",
+        "notes": "试点动作：保留抱臂与重心转移，裁掉后半段情绪松散的双手背后动作；先直视，再短暂别开目光，收尾回看用户。神态为克制的不悦和轻微撅嘴，不做凶狠怒容。",
+        "scores": {
+          "foot": 4,
+          "body": 4,
+          "arm": 4,
+          "expression": 4,
+          "transition": 4,
+          "character": 4
+        }
+      }
+    },
+    "Blush.vrma": {
+      "loop": false,
+      "speed": 0.85,
+      "fadeIn": 0.3,
+      "fadeOut": 0.45,
+      "idleBefore": 0.55,
+      "idleAfter": 0.9,
+      "autoReturn": true,
+      "rootMotion": {
+        "horizontal": false,
+        "vertical": true,
+        "forward": false,
+        "rotation": true,
+        "inPlace": true
+      },
+      "gazeTarget": "away",
+      "expressions": [
+        {
+          "time": 0.1,
+          "expression": "happy",
+          "weight": 0.28,
+          "attack": 0.3,
+          "hold": 2.8,
+          "release": 0.55,
+          "easing": "easeInOut"
+        },
+        {
+          "time": 0.15,
+          "expression": "relaxed",
+          "weight": 0.22,
+          "attack": 0.35,
+          "hold": 2.65,
+          "release": 0.55,
+          "easing": "easeInOut"
+        }
+      ],
+      "blink": {
+        "enabled": true,
+        "interval": 3.2,
+        "randomRange": 0.8,
+        "speed": 0.16,
+        "doubleBlinkChance": 0.18
+      },
+      "review": {
+        "status": "pending",
+        "notes": "首轮角色化：轻微笑意并暂时移开视线。",
+        "scores": {
+          "foot": 4,
+          "body": 4,
+          "arm": 4,
+          "expression": 4,
+          "transition": 4,
+          "character": 4
+        }
+      }
+    },
+    "Clapping.vrma": {
+      "loop": true,
+      "speed": 0.85,
+      "fadeIn": 0.2,
+      "fadeOut": 0.3,
+      "idleBefore": 0.35,
+      "idleAfter": 0.65,
+      "autoReturn": true,
+      "rootMotion": {
+        "horizontal": false,
+        "vertical": true,
+        "forward": false,
+        "rotation": true,
+        "inPlace": true
+      },
+      "gazeTarget": "user",
+      "expressions": [
+        {
+          "time": 0.02,
+          "expression": "happy",
+          "weight": 0.48,
+          "attack": 0.18,
+          "hold": 0.72,
+          "release": 0.24,
+          "easing": "easeInOut"
+        }
+      ],
+      "blink": {
+        "enabled": true,
+        "interval": 4.0,
+        "randomRange": 1.0,
+        "speed": 0.13,
+        "doubleBlinkChance": 0.12
+      },
+      "review": {
+        "status": "pending",
+        "notes": "首轮角色化：克制的鼓掌与明确的正向反馈。",
+        "scores": {
+          "foot": 4,
+          "body": 4,
+          "arm": 4,
+          "expression": 4,
+          "transition": 4,
+          "character": 4
+        }
+      }
+    },
+    "Looking Around.vrma": {
+      "loop": true,
+      "speed": 0.85,
+      "fadeIn": 0.45,
+      "fadeOut": 0.55,
+      "idleBefore": 0.7,
+      "idleAfter": 0.9,
+      "autoReturn": true,
+      "rootMotion": {
+        "horizontal": false,
+        "vertical": true,
+        "forward": false,
+        "rotation": true,
+        "inPlace": true
+      },
+      "gazeTarget": "none",
+      "expressions": [
+        {
+          "time": 0.15,
+          "expression": "relaxed",
+          "weight": 0.14,
+          "attack": 0.45,
+          "hold": 5.1,
+          "release": 0.55,
+          "easing": "easeInOut"
+        }
+      ],
+      "blink": {
+        "enabled": true,
+        "interval": 4.4,
+        "randomRange": 1.5,
+        "speed": 0.15,
+        "doubleBlinkChance": 0.12
+      },
+      "review": {
+        "status": "pending",
+        "notes": "首轮角色化：关闭强制凝视，保留动作本身的观察感。",
+        "scores": {
+          "foot": 4,
+          "body": 4,
+          "arm": 4,
+          "expression": 4,
+          "transition": 4,
+          "character": 4
+        }
+      }
+    },
+    "Standing Greeting.vrma": {
+      "loop": false,
+      "speed": 0.85,
+      "trimStart": 0.45,
+      "trimEnd": 4.7,
+      "bodyWeights": {
+        "head": 96,
+        "neck": 96,
+        "chest": 95,
+        "spine": 95,
+        "hips": 100,
+        "leftArm": 94,
+        "rightArm": 94,
+        "leftHand": 94,
+        "rightHand": 94,
+        "leftLeg": 100,
+        "rightLeg": 100,
+        "leftFoot": 100,
+        "rightFoot": 100
+      },
+      "fadeIn": 0.3,
+      "fadeOut": 0.45,
+      "idleBefore": 0.45,
+      "idleAfter": 0.85,
+      "autoReturn": true,
+      "rootMotion": {
+        "horizontal": false,
+        "vertical": true,
+        "forward": false,
+        "rotation": true,
+        "inPlace": true
+      },
+      "gazeTarget": "user",
+      "expressions": [
+        {
+          "time": 0.2,
+          "expression": "happy",
+          "weight": 0.32,
+          "attack": 0.3,
+          "hold": 3.95,
+          "release": 0.55,
+          "easing": "easeInOut"
+        }
+      ],
+      "blink": {
+        "enabled": true,
+        "interval": 4.1,
+        "randomRange": 1.0,
+        "speed": 0.14,
+        "doubleBlinkChance": 0.16
+      },
+      "review": {
+        "status": "pending",
+        "notes": "样板动作：裁掉静止段，压低手臂幅度，保留克制笑容与轻微呼吸。",
+        "scores": {
+          "foot": 4,
+          "body": 4,
+          "arm": 4,
+          "expression": 4,
+          "transition": 4,
+          "character": 5
+        }
+      }
+    },
+    "Surprised.vrma": {
+      "loop": false,
+      "speed": 1.0,
+      "fadeIn": 0.15,
+      "fadeOut": 0.4,
+      "idleBefore": 0.25,
+      "idleAfter": 0.85,
+      "autoReturn": true,
+      "rootMotion": {
+        "horizontal": false,
+        "vertical": true,
+        "forward": false,
+        "rotation": true,
+        "inPlace": true
+      },
+      "gazeTarget": "user",
+      "expressions": [
+        {
+          "time": 0.05,
+          "expression": "Surprised",
+          "weight": 0.62,
+          "attack": 0.12,
+          "hold": 2.85,
+          "release": 0.55,
+          "easing": "easeOut"
+        },
+        {
+          "time": 0.08,
+          "expression": "oh",
+          "weight": 0.18,
+          "attack": 0.12,
+          "hold": 1.1,
+          "release": 0.35,
+          "easing": "easeOut"
+        }
+      ],
+      "blink": {
+        "enabled": true,
+        "interval": 5.0,
+        "randomRange": 0.7,
+        "speed": 0.12,
+        "doubleBlinkChance": 0.06
+      },
+      "review": {
+        "status": "pending",
+        "notes": "首轮角色化：短促惊讶，避免整段保持张嘴。",
+        "scores": {
+          "foot": 4,
+          "body": 4,
+          "arm": 4,
+          "expression": 4,
+          "transition": 4,
+          "character": 4
+        }
+      }
+    },
+    "Talking.vrma": {
+      "loop": true,
+      "speed": 0.85,
+      "fadeIn": 0.25,
+      "fadeOut": 0.4,
+      "idleBefore": 0.4,
+      "idleAfter": 0.7,
+      "autoReturn": true,
+      "rootMotion": {
+        "horizontal": false,
+        "vertical": true,
+        "forward": false,
+        "rotation": true,
+        "inPlace": true
+      },
+      "gazeTarget": "user",
+      "expressions": [
+        {
+          "time": 0.05,
+          "expression": "happy",
+          "weight": 0.18,
+          "attack": 0.3,
+          "hold": 4.25,
+          "release": 0.5,
+          "easing": "easeInOut"
+        },
+        {
+          "time": 0.35,
+          "expression": "aa",
+          "weight": 0.2,
+          "attack": 0.1,
+          "hold": 0.16,
+          "release": 0.12,
+          "easing": "easeInOut"
+        },
+        {
+          "time": 1.05,
+          "expression": "ih",
+          "weight": 0.16,
+          "attack": 0.09,
+          "hold": 0.15,
+          "release": 0.12,
+          "easing": "easeInOut"
+        },
+        {
+          "time": 1.75,
+          "expression": "aa",
+          "weight": 0.22,
+          "attack": 0.1,
+          "hold": 0.18,
+          "release": 0.12,
+          "easing": "easeInOut"
+        },
+        {
+          "time": 2.55,
+          "expression": "ou",
+          "weight": 0.14,
+          "attack": 0.09,
+          "hold": 0.14,
+          "release": 0.11,
+          "easing": "easeInOut"
+        },
+        {
+          "time": 3.25,
+          "expression": "ih",
+          "weight": 0.17,
+          "attack": 0.09,
+          "hold": 0.16,
+          "release": 0.12,
+          "easing": "easeInOut"
+        },
+        {
+          "time": 4.05,
+          "expression": "aa",
+          "weight": 0.19,
+          "attack": 0.1,
+          "hold": 0.16,
+          "release": 0.12,
+          "easing": "easeInOut"
+        }
+      ],
+      "blink": {
+        "enabled": true,
+        "interval": 3.8,
+        "randomRange": 1.2,
+        "speed": 0.14,
+        "doubleBlinkChance": 0.14
+      },
+      "review": {
+        "status": "pending",
+        "notes": "首轮角色化：轻微笑意与低强度口型；正式聊天时可由语音口型覆盖。",
+        "scores": {
+          "foot": 4,
+          "body": 4,
+          "arm": 4,
+          "expression": 4,
+          "transition": 4,
+          "character": 5
+        }
+      }
+    },
+    "Thinking.vrma": {
+      "loop": true,
+      "speed": 0.85,
+      "fadeIn": 0.4,
+      "fadeOut": 0.5,
+      "idleBefore": 0.6,
+      "idleAfter": 0.9,
+      "autoReturn": true,
+      "rootMotion": {
+        "horizontal": false,
+        "vertical": true,
+        "forward": false,
+        "rotation": true,
+        "inPlace": true
+      },
+      "gazeTarget": "up",
+      "expressions": [
+        {
+          "time": 0.12,
+          "expression": "relaxed",
+          "weight": 0.3,
+          "attack": 0.4,
+          "hold": 3.05,
+          "release": 0.5,
+          "easing": "easeInOut"
+        }
+      ],
+      "blink": {
+        "enabled": true,
+        "interval": 4.6,
+        "randomRange": 1.1,
+        "speed": 0.16,
+        "doubleBlinkChance": 0.1
+      },
+      "review": {
+        "status": "pending",
+        "notes": "首轮角色化：视线上移，表情收敛，避免思考时仍直盯用户。",
+        "scores": {
+          "foot": 4,
+          "body": 4,
+          "arm": 4,
+          "expression": 4,
+          "transition": 4,
+          "character": 4
+        }
+      }
+    },
+    "VRMA_03.vrma": {
+      "displayName": "俏皮问候（待重调）",
+      "displayNameEn": "Playful Greeting (Needs Retune)",
+      "loop": true,
+      "speed": 0.85,
+      "sourceFile": "Talking.vrma",
+      "freezeFrame": 2.58,
+      "generatedDuration": 8,
+      "procedural": {
+        "breathing": 1,
+        "sway": 1.2,
+        "head": 0.7,
+        "shoulder": 0.8
+      },
+      "boneOffsets": {
+        "leftShoulder": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        },
+        "leftUpperArm": {
+          "x": 0,
+          "y": 0,
+          "z": 2
+        },
+        "rightShoulder": {
+          "x": 0,
+          "y": 0,
+          "z": -1
+        },
+        "rightUpperArm": {
+          "x": 0,
+          "y": 0,
+          "z": -2
+        }
+      },
+      "fadeIn": 0.8,
+      "fadeOut": 0.8,
+      "idleBefore": 0.0,
+      "idleAfter": 0.0,
+      "autoReturn": false,
+      "rootMotion": {
+        "horizontal": false,
+        "vertical": true,
+        "forward": false,
+        "rotation": true,
+        "inPlace": true
+      },
+      "gazeTarget": "user",
+      "expressions": [
+        {
+          "time": 0.2,
+          "expression": "relaxed",
+          "weight": 0.1,
+          "attack": 0.7,
+          "hold": 6.35,
+          "release": 0.7,
+          "easing": "easeInOut"
+        },
+        {
+          "time": 0.25,
+          "expression": "happy",
+          "weight": 0.08,
+          "attack": 0.8,
+          "hold": 6.25,
+          "release": 0.75,
+          "easing": "easeInOut"
+        }
+      ],
+      "blink": {
+        "enabled": true,
+        "interval": 4.1,
+        "randomRange": 1.6,
+        "speed": 0.15,
+        "doubleBlinkChance": 0.15
+      },
+      "review": {
+        "status": "pending",
+        "notes": "样板动作：从说话动作抽取自信而不夸张的非对称站姿，再烘焙呼吸、重心和头部微动作；原始抬脚手势保留在 A 版。",
+        "scores": {
+          "foot": 4,
+          "body": 4,
+          "arm": 4,
+          "expression": 4,
+          "transition": 4,
+          "character": 5
+        }
+      }
+    }
+  }
+}

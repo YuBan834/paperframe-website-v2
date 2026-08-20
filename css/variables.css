@@ -1,0 +1,247 @@
+/* ═══════════════════════════════════════════════════════════════
+   P3R × 食蜂操祈 Design Tokens
+   "学园都市心灵终端" — Academy City Mental Terminal
+   Persona 3 Reload UI rhythm × Shokuhou Misaki identity
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── Core Palette ─── */
+  --deep: #080e1a;
+  --ocean: #0f1a30;
+  --midnight: #162440;
+  --shokuhou-purple: #8b72ad;
+  --shokuhou-purple-deep: #493d61;
+  --shokuhou-gold: #f2c66d;
+  --shokuhou-white: #f7f2e8;
+  --p3r-cyan: #59d2e6;
+  --p3r-cyan-dim: rgba(64, 200, 224, 0.25);
+
+  /* ─── Desktop ─── */
+  --desktop-bg: linear-gradient(170deg, #080e1a 0%, #0f1a30 20%, #162440 45%, #1a1a40 65%, #0f1a30 85%, #080e1a 100%);
+  --desktop-bg-fallback: #080e1a;
+
+  /* ─── Particles ─── */
+  --particle-star: #f0c060;
+  --particle-star-dim: #c08030;
+  --particle-shard: rgba(64, 200, 224, 0.6);
+  --particle-bubble: rgba(200, 180, 255, 0.3);
+  --particle-colored-1: #ff4060;
+  --particle-colored-2: #40c8e0;
+  --particle-colored-3: #c040f0;
+  --particle-colored-4: #40f080;
+  --particle-colored-5: #f0a040;
+  --particle-colored-6: #4080f0;
+  --particle-colored-7: #f040c0;
+  --particle-colored-8: #80f0c0;
+
+  /* ─── Windows (Deep glass) ─── */
+  --window-bg: rgba(8, 14, 25, 0.94);
+  --window-border: rgba(240, 192, 96, 0.22);
+  --window-border-active: rgba(89, 210, 230, 0.58);
+  --window-shadow: 0 22px 70px rgba(0, 0, 0, 0.52), 0 0 1px rgba(242, 198, 109, 0.18) inset;
+  --window-titlebar-bg: rgba(5, 10, 19, 0.96);
+  --window-text: #f5f0e8;
+  --window-text-secondary: #a5b0c3;
+
+  /* ─── Icons (Star-shaped) ─── */
+  --icon-bg: rgba(8, 14, 26, 0.72);
+  --icon-bg-hover: rgba(8, 20, 34, 0.9);
+  --icon-glow: rgba(240, 192, 96, 0.5);
+  --icon-glow-strong: rgba(240, 192, 96, 0.7);
+  --icon-text: #d0d8f0;
+  --icon-text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+  --icon-selected-border: rgba(240, 192, 96, 0.7);
+
+  /* ─── Taskbar ─── */
+  --taskbar-bg: rgba(5, 10, 19, 0.92);
+  --taskbar-border: rgba(242, 198, 109, 0.24);
+  --taskbar-text: #d0d8f0;
+  --taskbar-btn-hover: rgba(89, 210, 230, 0.08);
+  --taskbar-btn-active: rgba(89, 210, 230, 0.16);
+
+  /* ─── Start Menu ─── */
+  --start-menu-bg: rgba(12, 22, 40, 0.92);
+  --start-menu-border: rgba(242, 198, 109, 0.3);
+  --start-menu-text: #f5f0e8;
+  --start-menu-hover: rgba(89, 210, 230, 0.1);
+  --start-menu-header-bg: rgba(242, 198, 109, 0.08);
+
+  /* ─── Chat Bubble ─── */
+  --chat-bubble-bg: rgba(12, 22, 40, 0.9);
+  --chat-bubble-text: #f5f0e8;
+
+  /* ─── Context Menu ─── */
+  --context-menu-bg: rgba(12, 22, 40, 0.9);
+  --context-menu-border: rgba(123, 79, 191, 0.3);
+  --context-menu-text: #f5f0e8;
+  --context-menu-hover: rgba(123, 79, 191, 0.2);
+
+  /* ─── Command Line ─── */
+  --cmd-bg: rgba(6, 12, 22, 0.96);
+  --cmd-text: #40c8e0;
+  --cmd-border: rgba(64, 200, 224, 0.3);
+
+  /* ─── Notifications ─── */
+  --egg-notification-bg: rgba(6, 12, 22, 0.96);
+  --egg-notification-text: #f0c060;
+  --egg-notification-border: rgba(240, 192, 96, 0.4);
+
+  /* ─── Module Cards ─── */
+  --module-card-bg: rgba(255, 255, 255, 0.035);
+  --module-card-hover: rgba(89, 210, 230, 0.08);
+  --module-tag-bg: rgba(240, 192, 96, 0.15);
+  --module-tag-text: #f0c060;
+  --module-divider: rgba(242, 198, 109, 0.15);
+
+  /* ─── 3D Lighting ─── */
+  --three-light-color: #e8d8c0;
+  --three-light-intensity: 1.0;
+
+  /* ─── Transitions ─── */
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+  --transition-slow: 500ms;
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-underwater: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* ─── Dimensions ─── */
+  --taskbar-height: clamp(52px, 5.8vh, 60px);
+  --window-radius: 4px;
+  --icon-size: 72px;
+
+  /* ─── P3R Motion ─── */
+  --float-distance: 6px;
+  --float-duration: 4s;
+  --tilt-angle: 3.5deg;
+  --tilt-angle-strong: 5deg;
+}
+
+/* ═══ Night Intensity Variant ═══ */
+body[data-time-phase="dawn"] {
+  --desktop-bg: linear-gradient(168deg, #0a1220 0%, #16233a 48%, #34243a 100%);
+  --window-border-active: rgba(120, 220, 232, 0.58);
+  --particle-star: #f3d092;
+  --three-light-color: #ffd7b8;
+  --three-light-intensity: 1.12;
+}
+
+body[data-time-phase="day"] {
+  --desktop-bg: linear-gradient(170deg, #080e1a 0%, #0f1a30 35%, #162440 68%, #080e1a 100%);
+  --three-light-color: #ffeed8;
+  --three-light-intensity: 1.35;
+}
+
+body[data-time-phase="dusk"] {
+  --desktop-bg: linear-gradient(166deg, #080e1a 0%, #171a34 44%, #3b2136 100%);
+  --window-border-active: rgba(174, 132, 210, 0.56);
+  --particle-star: #efb95e;
+  --three-light-color: #ffe2cc;
+  --three-light-intensity: 0.92;
+}
+
+body[data-time-phase="night"] {
+  --desktop-bg: linear-gradient(170deg, #030812 0%, #07101d 38%, #10172d 68%, #030812 100%);
+  --particle-star: #d4b66b;
+  --window-bg: rgba(5, 10, 20, 0.96);
+  --window-border: rgba(89, 210, 230, 0.12);
+  --window-border-active: rgba(123, 145, 206, 0.5);
+  --taskbar-bg: rgba(2, 7, 14, 0.96);
+  --three-light-color: #c7d5ff;
+  --three-light-intensity: 0.78;
+}
+
+/* ═══ Login Override ═══ */
+body.login-active {
+  --desktop-bg: linear-gradient(170deg, #050a14 0%, #0c1628 50%, #080e18 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   P3R Decorative Utilities
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Tilt System ─── */
+.p3r-tilt       { transform: rotate(var(--tilt-angle, 3.5deg)); }
+.p3r-tilt-left  { transform: rotate(calc(-1 * var(--tilt-angle, 3.5deg))); }
+.p3r-tilt-strong{ transform: rotate(var(--tilt-angle-strong, 5deg)); }
+
+/* ─── Divider: ─ ✦ ─ ∘ ─ ✦ ─ ─── */
+.p3r-divider {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--shokuhou-gold); opacity: 0.5;
+  font-size: 10px; letter-spacing: 3px; user-select: none;
+}
+.p3r-divider::before, .p3r-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--shokuhou-gold) 35%, var(--p3r-cyan) 75%, transparent);
+}
+
+/* ─── Floating — underwater suspension ─── */
+.p3r-float    { animation: p3r-float var(--float-duration, 4s) ease-in-out infinite; }
+.p3r-float-1  { animation-delay: 0s; }
+.p3r-float-2  { animation-delay: 0.4s; }
+.p3r-float-3  { animation-delay: 0.8s; }
+.p3r-float-4  { animation-delay: 1.2s; }
+.p3r-float-5  { animation-delay: 1.6s; }
+@keyframes p3r-float {
+  0%, 100% { transform: translateY(0) rotate(var(--tilt-angle, 3.5deg)); }
+  50% { transform: translateY(calc(-1 * var(--float-distance, 6px))) rotate(var(--tilt-angle, 3.5deg)); }
+}
+
+/* ─── Glass panels ─── */
+.p3r-glass {
+  background: rgba(15, 26, 48, 0.65);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--p3r-cyan-dim); border-radius: var(--window-radius);
+}
+.p3r-glass-heavy {
+  background: rgba(8, 14, 26, 0.88);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--p3r-cyan-dim); border-radius: var(--window-radius);
+}
+
+/* ─── Diamond corners ─── */
+.p3r-diamond-corners { position: relative; }
+.p3r-diamond-corners::before, .p3r-diamond-corners::after {
+  content: '◆'; position: absolute; font-size: 7px;
+  color: var(--shokuhou-gold); opacity: 0.4; pointer-events: none;
+}
+.p3r-diamond-corners::before { top: 5px; left: 10px; }
+.p3r-diamond-corners::after  { top: 5px; right: 10px; }
+
+/* ─── Glow pulse ─── */
+.p3r-glow-pulse { animation: p3r-glow-pulse 2.5s ease-in-out infinite; }
+@keyframes p3r-glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(240,192,96,0.3); }
+  50% { box-shadow: 0 0 24px rgba(240,192,96,0.5), 0 0 48px rgba(123,79,191,0.3); }
+}
+
+/* ─── Star sparkle ─── */
+@keyframes p3r-sparkle {
+  0%   { opacity: 0; transform: scale(0) rotate(0deg); }
+  50%  { opacity: 1; transform: scale(1.2) rotate(180deg); }
+  100% { opacity: 0; transform: scale(0) rotate(360deg); }
+}
+
+/* ─── Glass shard fragment ─── */
+.p3r-shard {
+  position: absolute; pointer-events: none;
+  width: 18px; height: 26px;
+  background: rgba(64, 200, 224, 0.25);
+  clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 25% 75%, 0% 20%);
+}
+@keyframes shard-fall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+}
+
+/* ─── Bubble rise ─── */
+@keyframes bubble-rise {
+  0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.5; }
+  100% { transform: translateY(-100vh) translateX(30px) scale(0.3); opacity: 0; }
+}
+
+/* ─── Selection ─── */
+::selection { background: rgba(89, 210, 230, 0.35); color: var(--shokuhou-white); }

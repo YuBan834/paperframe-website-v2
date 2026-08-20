@@ -1,0 +1,355 @@
+/* ═══════════════════════════════════════════════════════════════
+   Mental Out / Memory Access entry gate
+   One interface language across three independent memory channels.
+   ═══════════════════════════════════════════════════════════════ */
+
+#login-overlay {
+  --login-accent: 242, 198, 109;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: hidden;
+  color: #f4f7f8;
+  background: #020711;
+  isolation: isolate;
+}
+#login-overlay[data-wallpaper='elaina'] { --login-accent: 126, 183, 255; }
+#login-overlay[data-wallpaper='miku'] { --login-accent: 89, 210, 230; }
+
+#login-wallpapers,
+.login-scene,
+#login-wallpaper-fallback,
+#login-gradient,
+#login-particles,
+#login-transition {
+  position: absolute;
+  inset: 0;
+}
+
+#login-wallpapers { z-index: 0; background: #030914; }
+.login-scene {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.025);
+  transition: opacity 1100ms ease, transform 1600ms ease, visibility 1100ms;
+}
+.login-scene.is-active { opacity: 1; visibility: visible; transform: scale(1); }
+.login-scene canvas,
+.login-scene video,
+.login-scene > img { display: block; width: 100%; height: 100%; }
+#arona-canvas,
+#elaina-wallpaper { object-fit: cover; }
+
+#login-wallpaper-fallback {
+  display: none;
+  z-index: -1;
+  background: radial-gradient(circle at 42% 48%, #152c52, #050a14 66%);
+}
+
+/* Miku is reconstructed from the original Wallpaper Engine layers. */
+.miku-scene { overflow: hidden; background: #03112d; }
+.miku-background {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  animation: miku-camera 14s ease-in-out infinite alternate;
+}
+.miku-water {
+  position: absolute;
+  left: -0.6%;
+  bottom: -0.4%;
+  width: 101.2% !important;
+  height: 53.2% !important;
+  object-fit: fill;
+  transform-origin: 50% 0;
+  animation: miku-water 7s ease-in-out infinite alternate;
+}
+.miku-character {
+  position: absolute;
+  left: 8.8%;
+  bottom: -0.4%;
+  width: 51% !important;
+  height: 82.8% !important;
+  object-fit: fill;
+  transform-origin: 68% 94%;
+  filter: drop-shadow(0 18px 26px rgba(0, 10, 35, 0.28));
+  animation: miku-breeze 5.8s ease-in-out infinite alternate;
+}
+@keyframes miku-camera { to { transform: scale(1.018) translate3d(-0.25%, -0.2%, 0); } }
+@keyframes miku-water {
+  0% { transform: translate3d(-0.15%, 0, 0) skewX(-0.08deg) scaleY(1.002); filter: brightness(0.98); }
+  100% { transform: translate3d(0.18%, 0.18%, 0) skewX(0.1deg) scaleY(0.997); filter: brightness(1.04); }
+}
+@keyframes miku-breeze {
+  0% { transform: translate3d(-0.12%, 0, 0) rotate(-0.08deg); }
+  100% { transform: translate3d(0.16%, -0.18%, 0) rotate(0.15deg); }
+}
+.miku-shooting-star {
+  position: absolute;
+  width: 120px;
+  height: 1px;
+  opacity: 0;
+  transform: rotate(-34deg);
+  background: linear-gradient(90deg, transparent, rgba(255,244,206,0.9));
+  filter: drop-shadow(0 0 6px rgba(116,213,255,0.9));
+}
+.miku-shooting-star::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff6d8;
+  box-shadow: 0 0 13px #72d8ff;
+}
+.miku-shooting-star.star-a { top: 19%; left: 75%; animation: shooting-star 7.8s 1.4s ease-in infinite; }
+.miku-shooting-star.star-b { top: 31%; left: 54%; animation: shooting-star 9.4s 5.2s ease-in infinite; }
+@keyframes shooting-star {
+  0%, 76% { opacity: 0; translate: 0 0; }
+  79% { opacity: 1; }
+  88%, 100% { opacity: 0; translate: -360px 230px; }
+}
+
+/* A stable OS overlay keeps unrelated artwork inside one visual universe. */
+#login-gradient {
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(2,7,17,0.42), transparent 24%, transparent 70%, rgba(2,7,17,0.32)),
+    linear-gradient(180deg, rgba(2,7,17,0.24), transparent 35%, rgba(2,7,17,0.54)),
+    repeating-linear-gradient(180deg, rgba(255,255,255,0.016) 0 1px, transparent 1px 4px);
+}
+#login-gradient::before {
+  content: '';
+  position: absolute;
+  left: -5vw;
+  right: -5vw;
+  top: 7.5vh;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--login-accent),0.5), transparent);
+  transform: rotate(2.3deg);
+}
+#login-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 130px rgba(0,0,0,0.34);
+}
+#login-particles { z-index: 2; pointer-events: none; mix-blend-mode: screen; }
+#login-transition { display: none; }
+
+.login-system-mark,
+.login-corner-code {
+  position: absolute;
+  z-index: 4;
+  color: rgba(230,241,247,0.56);
+  font: 700 9px/1 'Consolas', monospace;
+  letter-spacing: 0.19em;
+  pointer-events: none;
+}
+.login-system-mark { top: 24px; left: 30px; padding-left: 64px; }
+.login-system-mark::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 48px;
+  height: 2px;
+  background: rgb(var(--login-accent));
+  box-shadow: 0 0 10px rgba(var(--login-accent),0.46);
+}
+.login-corner-code { right: 28px; bottom: 24px; writing-mode: vertical-rl; }
+
+#login-content {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  z-index: 5;
+  width: min(720px, 72vw);
+  transform: translate(-50%, -50%) rotate(-2.8deg);
+  transform-origin: 50% 50%;
+  text-align: center;
+  transition: left 900ms ease, top 900ms ease, opacity 260ms ease, transform 420ms ease;
+  animation: login-content-in 900ms cubic-bezier(0.18,0.8,0.24,1) both;
+}
+#login-overlay[data-wallpaper='elaina'] #login-content { left: 31%; top: 47%; }
+#login-overlay[data-wallpaper='miku'] #login-content { left: 66%; top: 46%; }
+@keyframes login-content-in {
+  from { opacity: 0; transform: translate(-50%, calc(-50% + 24px)) rotate(-2.8deg) scale(0.96); }
+}
+
+#login-channel {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: rgb(var(--login-accent));
+  font: 800 10px/1 'Consolas', monospace;
+  letter-spacing: 0.22em;
+  text-shadow: 0 0 16px rgba(var(--login-accent),0.45);
+}
+#login-channel::before,
+#login-channel::after { content: ''; width: 32px; height: 1px; background: currentColor; opacity: 0.6; }
+
+#login-title {
+  margin: 18px 0 12px;
+  color: #f7f7f1;
+  font: 800 clamp(34px, 4.5vw, 72px)/0.98 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+#login-subtitle {
+  margin: 0;
+  color: rgba(237,243,246,0.62);
+  font: 700 9px/1.5 'Consolas', monospace;
+  letter-spacing: 0.2em;
+}
+
+#login-enter {
+  position: relative;
+  width: 236px;
+  height: 58px;
+  display: grid;
+  grid-template-columns: 42px 1fr 30px;
+  align-items: center;
+  margin: 38px auto 0;
+  padding: 0 10px;
+  color: #07101a;
+  background: rgb(var(--login-accent));
+  border: 0;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.14), 0 18px 40px rgba(0,0,0,0.3);
+  font-family: 'Consolas', monospace;
+  cursor: pointer;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+#login-enter::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(3,10,18,0.23);
+  clip-path: inherit;
+}
+#login-enter:hover,
+#login-enter:focus-visible { transform: translateY(-3px) skewX(-2deg); filter: brightness(1.12); outline: none; }
+#login-enter:disabled { cursor: wait; }
+.login-enter-index { font: 800 10px/1 'Consolas', monospace; opacity: 0.66; }
+#login-enter-label { font: 900 12px/1 'Consolas', monospace; letter-spacing: 0.16em; }
+.login-enter-arrow { font-size: 22px; }
+
+#login-scene-nav {
+  position: absolute;
+  left: 28px;
+  bottom: 24px;
+  z-index: 6;
+  display: flex;
+  gap: 8px;
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+#login-scene-nav button {
+  min-width: 104px;
+  padding: 8px 10px;
+  color: rgba(226,237,243,0.55);
+  background: rgba(3,8,17,0.55);
+  border: 1px solid rgba(255,255,255,0.1);
+  font: 700 8px/1 'Consolas', monospace;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+#login-scene-nav button span { margin-right: 8px; color: rgb(var(--login-accent)); }
+#login-scene-nav button:hover { color: #fff; border-color: rgba(var(--login-accent),0.42); }
+#login-scene-nav button.is-active {
+  color: #fff;
+  background: rgba(3,8,17,0.82);
+  border-color: rgba(var(--login-accent),0.62);
+  box-shadow: inset 0 -2px rgb(var(--login-accent));
+}
+
+#login-loader {
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  z-index: 7;
+  width: min(660px, calc(100vw - 48px));
+  padding: 18px 20px 16px;
+  color: #e8f1f5;
+  background: rgba(2,7,15,0.88);
+  border: 1px solid rgba(var(--login-accent),0.3);
+  border-left: 3px solid rgb(var(--login-accent));
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%);
+  backdrop-filter: blur(16px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 18px);
+  transition: opacity 260ms ease, transform 300ms ease, visibility 260ms;
+}
+.login-loader-heading,
+.login-loader-footer { display: flex; align-items: center; justify-content: space-between; }
+.login-loader-heading { font: 800 10px/1 'Consolas', monospace; letter-spacing: 0.13em; }
+#login-loader-percent { color: rgb(var(--login-accent)); font-size: 24px; }
+.login-loader-track {
+  height: 7px;
+  margin: 14px 0 11px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.07);
+  transform: skewX(-18deg);
+}
+#login-loader-bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, rgb(var(--login-accent)), #fff1c8);
+  box-shadow: 0 0 16px rgba(var(--login-accent),0.65);
+  transition: transform 110ms linear;
+}
+.login-loader-footer { color: rgba(220,234,241,0.4); font: 700 8px/1 'Consolas', monospace; letter-spacing: 0.1em; }
+
+#login-overlay.is-loading #login-content { opacity: 0; transform: translate(-50%, -54%) rotate(-2.8deg) scale(0.98); pointer-events: none; }
+#login-overlay.is-loading #login-scene-nav { opacity: 0; transform: translateY(8px); pointer-events: none; }
+#login-overlay.is-loading #login-loader { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+
+#login-overlay::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  z-index: 20;
+  pointer-events: none;
+  background: #020711;
+  transform: translateY(-120%) rotate(4deg);
+}
+#login-overlay.is-leaving::after { animation: login-shutter 880ms cubic-bezier(0.72,0,0.18,1) forwards; }
+#login-overlay.is-leaving #login-loader { opacity: 0; transform: translate(-50%, -12px); }
+@keyframes login-shutter {
+  0% { transform: translateY(-120%) rotate(4deg); }
+  48% { transform: translateY(0) rotate(4deg); }
+  62% { transform: translateY(0) rotate(4deg); }
+  100% { transform: translateY(120%) rotate(4deg); }
+}
+
+@media (max-width: 820px) {
+  .login-system-mark { left: 18px; top: 18px; }
+  .login-corner-code { display: none; }
+  #login-content,
+  #login-overlay[data-wallpaper='elaina'] #login-content,
+  #login-overlay[data-wallpaper='miku'] #login-content { left: 50%; top: 45%; width: 92vw; }
+  #login-title { white-space: normal; font-size: clamp(30px, 10vw, 48px); }
+  #login-scene-nav { left: 14px; right: 14px; bottom: 14px; }
+  #login-scene-nav button { flex: 1; min-width: 0; padding-inline: 5px; }
+  .miku-character { left: -4%; width: 70% !important; }
+  #login-loader { bottom: 18%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-scene,
+  #login-content,
+  .miku-background,
+  .miku-water,
+  .miku-character,
+  .miku-shooting-star { animation: none !important; transition-duration: 1ms !important; }
+}

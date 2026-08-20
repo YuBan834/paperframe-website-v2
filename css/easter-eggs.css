@@ -1,0 +1,463 @@
+/* ─── Achievement unlocked notification ─── */
+.egg-notification {
+  position: fixed;
+  top: 20px;
+  left: clamp(18px, 3vw, 56px);
+  transform: none;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+  background: var(--egg-notification-bg);
+  border: 1px solid var(--egg-notification-border);
+  color: var(--egg-notification-text);
+  font-size: 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  white-space: nowrap;
+}
+
+.egg-notification.hidden {
+  display: none;
+}
+
+.egg-icon {
+  font-size: 20px;
+}
+
+.egg-notification:not(.hidden) {
+  animation: egg-slide-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             egg-slide-out 0.3s ease-in 2.5s forwards;
+}
+
+@keyframes egg-slide-in {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes egg-slide-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* ─── Academy command terminal ─── */
+.command-line {
+  position: fixed;
+  left: clamp(24px, 5vw, 96px);
+  bottom: 19vh;
+  z-index: 180;
+  width: min(560px, calc(100vw - 48px));
+  height: min(330px, 48vh);
+  display: grid;
+  grid-template-rows: 52px 1fr 52px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #dbe8ee;
+  background: rgba(4, 10, 19, 0.97);
+  border: 1px solid rgba(89, 210, 230, 0.34);
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+  box-shadow: 0 26px 72px rgba(0, 0, 0, 0.62), inset 0 0 45px rgba(26, 107, 137, 0.06);
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.command-line.hidden {
+  display: none;
+}
+
+.cmd-header {
+  display: grid;
+  grid-template-columns: 1fr max-content 32px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(89, 210, 230, 0.18);
+  background: linear-gradient(90deg, rgba(89,210,230,0.09), transparent 64%);
+}
+.cmd-header > div { display: flex; align-items: center; gap: 10px; }
+.cmd-index {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 28px;
+  color: #07111e;
+  background: var(--p3r-cyan);
+  font-size: 9px;
+  font-weight: 800;
+}
+.cmd-header strong { color: #fff; font-size: 11px; letter-spacing: 0.12em; }
+.cmd-channel { color: rgba(242,198,109,0.55); font-size: 8px; letter-spacing: 0.13em; }
+#cmd-close, #achievement-close {
+  color: rgba(220,230,242,0.6);
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+}
+#cmd-close:hover, #achievement-close:hover { color: #fff; }
+
+.cmd-output {
+  padding: 14px 16px;
+  overflow: auto;
+  font-size: 11px;
+  line-height: 1.55;
+  scrollbar-color: rgba(89,210,230,0.35) transparent;
+}
+.cmd-output p { margin: 0 0 7px; color: rgba(219,232,238,0.76); }
+.cmd-output p span { color: var(--p3r-cyan); }
+.cmd-output p b { color: var(--shokuhou-gold); font-weight: 600; }
+.cmd-output .cmd-user { color: rgba(242,198,109,0.76); }
+.cmd-output .cmd-error { color: #ef8b8b; }
+
+.cmd-entry {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 15px;
+  border-top: 1px solid rgba(89,210,230,0.18);
+  background: rgba(255,255,255,0.025);
+}
+.cmd-prompt {
+  color: var(--p3r-cyan);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#cmd-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--cmd-text);
+  font-size: 11px;
+  font-family: inherit;
+  outline: none;
+}
+
+#cmd-input::placeholder {
+  color: rgba(89, 210, 230, 0.3);
+}
+
+.command-line:not(.hidden) {
+  animation: cmd-slide-in 0.28s cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+@keyframes cmd-slide-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─── Achievement archive: a drawer, not another desktop window ─── */
+.achievement-drawer {
+  position: fixed;
+  left: clamp(24px, 5vw, 96px);
+  bottom: 19vh;
+  z-index: 182;
+  width: min(630px, calc(100vw - 48px));
+  height: min(610px, 70vh);
+  max-height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #d8e2f0;
+  background: rgba(5, 10, 19, 0.975);
+  border: 1px solid rgba(242,198,109,0.3);
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%);
+  box-shadow: 0 28px 76px rgba(0,0,0,0.66);
+}
+.achievement-drawer.hidden { display: none; }
+.achievement-drawer > header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(242,198,109,0.16);
+  background: linear-gradient(90deg, rgba(242,198,109,0.1), transparent 66%);
+}
+.achievement-drawer-scroll {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+}
+.achievement-drawer-scroll:focus { outline: none; }
+.achievement-drawer-scroll::-webkit-scrollbar { width: 7px; }
+.achievement-drawer-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,.025); }
+.achievement-drawer-scroll::-webkit-scrollbar-thumb { background: rgba(89,210,230,.28); border: 2px solid rgba(5,10,19,.96); }
+.achievement-drawer header span { color: rgba(89,210,230,0.65); font: 700 8px/1 'Consolas', monospace; letter-spacing: 0.16em; }
+.achievement-drawer h2 { margin-top: 6px; color: #fff; font-size: 18px; }
+.achievement-progress { padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.achievement-progress strong { color: var(--shokuhou-gold); font: 700 15px/1 'Consolas', monospace; }
+.achievement-progress > div { height: 3px; margin: 9px 0 7px; overflow: hidden; background: rgba(255,255,255,0.07); }
+#achievement-progress-bar { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--p3r-cyan), var(--shokuhou-gold)); transition: width 350ms ease; }
+.achievement-progress span { color: rgba(210,220,235,0.48); font-size: 9px; }
+.achievement-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  padding: 12px;
+}
+.achievement-item {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) max-content;
+  align-items: center;
+  gap: 9px;
+  min-height: 52px;
+  padding: 8px 10px;
+  color: rgba(207,218,233,0.42);
+  background: rgba(255,255,255,0.025);
+  border-left: 2px solid rgba(255,255,255,0.07);
+}
+.achievement-item.is-unlocked { color: #eef3f8; background: rgba(242,198,109,0.055); border-left-color: var(--shokuhou-gold); }
+.achievement-item-icon { color: rgba(89,210,230,0.52); font: 800 13px/1 'Consolas', monospace; }
+.achievement-item.is-unlocked .achievement-item-icon { color: var(--shokuhou-gold); }
+.achievement-item strong { display: block; font-size: 10px; }
+.achievement-item small { display: block; margin-top: 4px; color: rgba(198,210,226,0.4); font: 8px/1 'Consolas', monospace; letter-spacing: 0.08em; }
+.achievement-item-status { font: 700 8px/1 'Consolas', monospace; color: rgba(89,210,230,0.46); }
+.achievement-item.is-unlocked .achievement-item-status { color: var(--shokuhou-gold); }
+
+.achievement-reward {
+  margin: 0 12px 14px;
+  padding: 14px;
+  border: 1px solid rgba(242,198,109,.18);
+  background:
+    linear-gradient(120deg, rgba(242,198,109,.08), transparent 48%),
+    rgba(255,255,255,.018);
+  transition: border-color 240ms ease, background 240ms ease;
+}
+.achievement-reward.is-ready { border-color: rgba(242,198,109,.5); background: linear-gradient(120deg, rgba(242,198,109,.14), rgba(89,210,230,.035) 64%, transparent); }
+.achievement-reward.is-claimed { border-color: rgba(89,210,230,.32); }
+.achievement-reward-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.achievement-reward-heading > div span { display: block; color: rgba(89,210,230,.62); font: 700 7px/1 'Consolas', monospace; letter-spacing: .18em; }
+.achievement-reward-heading strong { display: block; margin-top: 5px; color: #f4f6f8; font-size: 14px; }
+#achievement-reward-state { color: rgba(210,220,235,.36); font: 800 8px/1 'Consolas', monospace; letter-spacing: .12em; }
+.achievement-reward.is-ready #achievement-reward-state { color: var(--shokuhou-gold); }
+.achievement-reward.is-claimed #achievement-reward-state { color: var(--p3r-cyan); }
+#achievement-reward-copy { margin: 10px 0; color: rgba(210,220,235,.56); font-size: 9px; line-height: 1.7; }
+.achievement-reward-dots { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; margin: 10px 0 12px; }
+.achievement-reward-dot { height: 4px; background: rgba(255,255,255,.08); transition: background 300ms ease, box-shadow 300ms ease; }
+.achievement-reward-dot.is-complete { background: var(--shokuhou-gold); box-shadow: 0 0 9px rgba(242,198,109,.5); }
+
+.ticket-claim-form { display: grid; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.07); }
+.ticket-claim-form.hidden, .ticket-claimed-card.hidden { display: none; }
+.ticket-name-field > span { display: block; margin-bottom: 7px; color: rgba(232,239,247,.72); font-size: 9px; }
+.ticket-name-field small { color: rgba(210,220,235,.36); font: 7px/1 'Consolas', monospace; }
+.ticket-random-draw {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) repeat(4, 22px);
+  align-items: center;
+  gap: 5px;
+  min-height: 48px;
+  padding: 9px 10px;
+  overflow: hidden;
+  border: 1px solid rgba(242,198,109,.18);
+  background: linear-gradient(105deg, rgba(242,198,109,.08), rgba(89,210,230,.035));
+}
+.ticket-random-draw span { position: absolute; left: 10px; top: 8px; color: rgba(89,210,230,.58); font: 700 6px/1 'Consolas', monospace; letter-spacing: .16em; }
+.ticket-random-draw strong { align-self: end; padding-top: 12px; color: rgba(242,245,248,.84); font-size: 9px; }
+.ticket-random-draw i { display: block; width: 18px; height: 25px; border: 1px solid rgba(255,255,255,.18); transform: rotate(var(--ticket-tilt, -3deg)); }
+.ticket-random-draw i:nth-of-type(1) { --ticket-tilt: -6deg; background: rgba(242,198,109,.34); }
+.ticket-random-draw i:nth-of-type(2) { --ticket-tilt: 3deg; background: rgba(89,210,230,.2); }
+.ticket-random-draw i:nth-of-type(3) { --ticket-tilt: -2deg; background: rgba(255,255,255,.18); }
+.ticket-random-draw i:nth-of-type(4) { --ticket-tilt: 6deg; background: rgba(242,198,109,.18); }
+.ticket-name-field input { width: 100%; height: 38px; padding: 0 11px; color: #f2f5f8; background: rgba(0,0,0,.3); border: 1px solid rgba(89,210,230,.2); outline: none; font: 12px/1 'Consolas', monospace; }
+.ticket-name-field input:focus { border-color: var(--p3r-cyan); box-shadow: 0 0 0 2px rgba(89,210,230,.08); }
+.ticket-claim-button,
+.ticket-claimed-card button { min-height: 38px; color: #09111b; background: var(--shokuhou-gold); border: 0; cursor: pointer; font-weight: 800; }
+.ticket-claim-button:disabled { cursor: wait; opacity: .55; }
+.ticket-claim-message { min-height: 14px; color: rgba(210,220,235,.58); font-size: 9px; }
+.ticket-claim-message.is-error { color: #ef8d82; }
+.ticket-claimed-card { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 10px; padding-top: 12px; border-top: 1px solid rgba(89,210,230,.16); }
+.ticket-claimed-card span { display: block; color: var(--p3r-cyan); font: 700 7px/1 'Consolas', monospace; letter-spacing: .16em; }
+.ticket-claimed-card strong { display: block; margin-top: 5px; color: #fff; font: 800 17px/1 'Consolas', monospace; }
+.ticket-claimed-card button { min-width: 104px; background: var(--p3r-cyan); }
+
+/* ─── Mental Observatory ─── */
+.star-observation {
+  position: fixed;
+  inset: 0;
+  z-index: 195;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #f8f2e7;
+  background:
+    linear-gradient(116deg, rgba(2,7,15,.98), rgba(4,13,26,.92) 55%, rgba(16,10,20,.9)),
+    radial-gradient(circle at 70% 24%, rgba(89,210,230,.16), transparent 38%);
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+.star-observation::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.018) 4px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.star-observation.is-active { opacity: 1; }
+.star-observation.is-closing { opacity: 0; }
+.star-observation-field { position: absolute; inset: 0; }
+.star-observation-field i {
+  position: absolute;
+  left: var(--sx);
+  top: var(--sy);
+  width: var(--ss);
+  height: var(--ss);
+  border-radius: 50%;
+  background: #fff5d8;
+  box-shadow: 0 0 12px rgba(89,210,230,.8);
+  animation: observatory-star 1.9s var(--sd) ease-in-out infinite alternate;
+}
+.star-observation-map {
+  position: absolute;
+  right: 1vw;
+  top: 50%;
+  width: min(61vw, 900px);
+  transform: translateY(-50%) rotate(-4deg);
+  overflow: visible;
+  fill: rgba(242,198,109,.92);
+  stroke: rgba(89,210,230,.4);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 0 13px rgba(89,210,230,.18));
+  opacity: .72;
+}
+.star-observation-map path {
+  fill: none;
+  stroke-dasharray: 920;
+  stroke-dashoffset: 920;
+  animation: observatory-draw 2.2s .3s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.star-observation-map circle { transform-box: fill-box; transform-origin: center; animation: observatory-node 1.4s ease-in-out infinite alternate; }
+.star-observation-panel {
+  position: relative;
+  justify-self: start;
+  width: min(470px, 43vw);
+  margin-left: clamp(28px, 8vw, 150px);
+  padding: 28px 34px 30px;
+  border-left: 2px solid var(--shokuhou-gold);
+  background: linear-gradient(100deg, rgba(4,10,19,.94), rgba(4,10,19,.55) 78%, transparent);
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+  transform: translateX(-28px);
+  opacity: 0;
+  transition: transform 650ms cubic-bezier(.2,.9,.2,1) 280ms, opacity 500ms ease 280ms;
+}
+.star-observation.is-active .star-observation-panel { transform: none; opacity: 1; }
+.star-observation-code { color: var(--p3r-cyan); font: 800 8px/1 'Consolas', monospace; letter-spacing: .2em; }
+.star-observation-mark { display: block; margin: 22px 0 10px; color: var(--shokuhou-gold); font: 300 clamp(58px,8vw,108px)/.8 'Segoe UI Symbol', sans-serif; text-shadow: 0 0 28px rgba(242,198,109,.28); }
+.star-observation-panel h2 { color: #fff8e9; font-size: clamp(28px,4vw,54px); letter-spacing: .12em; }
+.star-observation-panel p { max-width: 390px; margin: 18px 0 26px; color: rgba(226,235,244,.68); font-size: 12px; line-height: 1.9; }
+.star-observation-panel button {
+  min-width: 132px;
+  height: 36px;
+  padding: 0 18px;
+  color: #07111c;
+  background: linear-gradient(90deg, var(--p3r-cyan), #d7e8dd 62%, var(--shokuhou-gold));
+  border: 0;
+  font: 800 8px/1 'Consolas', monospace;
+  letter-spacing: .14em;
+  cursor: pointer;
+}
+body.is-star-observing #desktop,
+body.is-star-observing #character-container { filter: brightness(.3) saturate(.55); }
+
+@keyframes observatory-star { to { opacity: .25; transform: scale(.45); } }
+@keyframes observatory-draw { to { stroke-dashoffset: 0; } }
+@keyframes observatory-node { to { opacity: .35; transform: scale(.55); } }
+
+/* ─── Electronic cat inspection protocol ─── */
+.cyber-cat-protocol {
+  position: fixed;
+  left: -220px;
+  bottom: clamp(64px, 8vh, 96px);
+  z-index: 188;
+  width: 190px;
+  height: 112px;
+  color: var(--p3r-cyan);
+  pointer-events: none;
+  opacity: 0;
+  filter: drop-shadow(0 0 14px rgba(89,210,230,.32));
+}
+.cyber-cat-protocol.is-active { opacity: 1; animation: cat-protocol-traverse 10.5s linear both; }
+.cyber-cat-protocol.is-exiting { opacity: 0; transition: opacity 800ms ease; }
+.cyber-cat-body { position: absolute; left: 11px; bottom: 20px; width: 138px; overflow: visible; }
+.cat-shell, .cat-tail, .cat-leg, .cat-circuit {
+  fill: rgba(5,12,22,.92);
+  stroke: url(#cat-signal);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+.cat-tail { fill: none; stroke-dasharray: 110; animation: cat-tail-signal 1.1s ease-in-out infinite alternate; }
+.cat-core { fill: rgba(89,210,230,.09); stroke: rgba(242,198,109,.82); stroke-width: 1; }
+.cat-eye { fill: #fff3bd; filter: drop-shadow(0 0 4px #f2c66d); animation: cat-eye-blink 3.2s steps(1) infinite; }
+.cat-circuit { fill: none; stroke: #59d2e6; stroke-width: 1.4; stroke-dasharray: 28; animation: cat-circuit-flow .9s linear infinite; }
+.cyber-cat-build {
+  position: absolute;
+  left: 0;
+  bottom: 14px;
+  width: 158px;
+  height: 82px;
+  border-block: 1px solid rgba(89,210,230,.22);
+  background: repeating-linear-gradient(90deg, transparent 0 9px, rgba(89,210,230,.08) 10px);
+  clip-path: inset(0 100% 0 0);
+  animation: cat-build 700ms ease-out forwards;
+}
+.cyber-cat-scan {
+  position: absolute;
+  left: 143px;
+  bottom: 21px;
+  width: 72px;
+  height: 62px;
+  background: linear-gradient(90deg, rgba(89,210,230,.22), transparent);
+  clip-path: polygon(0 44%, 100% 0, 100% 100%, 0 58%);
+  opacity: .48;
+  animation: cat-scan-pulse 1.4s ease-in-out infinite alternate;
+}
+.cyber-cat-status { position: absolute; left: 8px; bottom: 0; display: flex; gap: 8px; align-items: baseline; white-space: nowrap; }
+.cyber-cat-status b { color: #fff4d2; font: 800 7px/1 'Consolas', monospace; letter-spacing: .14em; }
+.cyber-cat-status small { color: rgba(89,210,230,.58); font: 700 5px/1 'Consolas', monospace; letter-spacing: .1em; }
+.cyber-cat-pips { position: absolute; left: 14px; top: 0; display: flex; gap: 5px; }
+.cyber-cat-pips i { width: 13px; height: 2px; background: rgba(255,255,255,.16); animation: cat-pip 6s steps(1) forwards; }
+.cyber-cat-pips i:nth-child(2) { animation-delay: 1.1s; }.cyber-cat-pips i:nth-child(3) { animation-delay: 2.3s; }
+.cyber-cat-pips i:nth-child(4) { animation-delay: 3.7s; }.cyber-cat-pips i:nth-child(5) { animation-delay: 5.2s; }.cyber-cat-pips i:nth-child(6) { animation-delay: 6.8s; }
+
+@keyframes cat-protocol-traverse {
+  0% { transform: translateX(0) scaleX(1); }
+  46% { transform: translateX(calc(100vw + 245px)) scaleX(1); }
+  50% { transform: translateX(calc(100vw + 245px)) scaleX(-1); }
+  96%, 100% { transform: translateX(0) scaleX(-1); }
+}
+@keyframes cat-build { to { clip-path: inset(0 0 0 0); } }
+@keyframes cat-tail-signal { to { stroke-dashoffset: 28; transform: rotate(3deg); transform-origin: 126px 60px; } }
+@keyframes cat-eye-blink { 0%, 93%, 100% { opacity: 1; } 94%, 97% { opacity: .08; } }
+@keyframes cat-circuit-flow { to { stroke-dashoffset: -28; } }
+@keyframes cat-scan-pulse { to { opacity: .14; transform: scaleX(.72); transform-origin: left; } }
+@keyframes cat-pip { 0% { background: rgba(255,255,255,.16); } 20%, 100% { background: var(--shokuhou-gold); box-shadow: 0 0 7px rgba(242,198,109,.7); } }
+
+@media (max-width: 760px) {
+  .command-line, .achievement-drawer { left: 12px; bottom: 12px; width: calc(100vw - 24px); height: calc(100vh - 24px); max-height: calc(100vh - 24px); }
+  .achievement-list { grid-template-columns: 1fr; }
+  .ticket-random-draw { grid-template-columns: minmax(0, 1fr) repeat(4, 17px); }
+  .cmd-channel { display: none; }
+  .star-observation-map { right: -45%; width: 125vw; opacity: .35; }
+  .star-observation-panel { justify-self: stretch; width: auto; margin: 0 20px; padding: 24px; }
+  .cyber-cat-protocol { bottom: 76px; transform: scale(.78); transform-origin: bottom left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-observation-field i,
+  .star-observation-map path,
+  .star-observation-map circle,
+  .cyber-cat-protocol,
+  .cat-tail,
+  .cat-circuit,
+  .cyber-cat-scan,
+  .cyber-cat-pips i { animation-duration: 1ms !important; animation-iteration-count: 1 !important; }
+}

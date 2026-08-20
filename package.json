@@ -1,0 +1,25 @@
+{
+  "name": "personal-website-v2",
+  "version": "2.0.0",
+  "description": "Mental Out interactive personal universe",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "check": "node scripts/verify-release.js",
+    "check:security": "npm audit --omit=dev --audit-level=moderate --registry=https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "personal-website",
+    "desktop-theme"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@pixiv/three-vrm": "^3.5.5",
+    "express": "^5.2.1",
+    "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4"
+  }
+}

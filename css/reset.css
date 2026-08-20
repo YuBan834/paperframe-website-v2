@@ -1,0 +1,24 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  font-family: 'Microsoft YaHei', 'PingFang SC', 'Segoe UI', 'Noto Sans SC', sans-serif;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  user-select: none; -webkit-user-select: none;
+  background: #080e1a; color: #f5f0e8;
+  cursor: default;
+}
+
+button, a { cursor: pointer; }
+button { border: none; background: none; font-family: inherit; color: inherit; }
+body.character-hover { cursor: pointer; }
+input, textarea { font-family: inherit; color: inherit; outline: none; }
+img { display: block; max-width: 100%; }
+dialog { border: none; padding: 0; background: none; }
+a { color: inherit; text-decoration: none; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: rgba(8, 14, 26, 0.5); }
+::-webkit-scrollbar-thumb { background: rgba(123, 79, 191, 0.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(123, 79, 191, 0.7); }

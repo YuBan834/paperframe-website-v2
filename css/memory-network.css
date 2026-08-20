@@ -1,0 +1,188 @@
+/* Interactive memory map living in the open center of the Academy panel. */
+#memory-network {
+  position: absolute;
+  left: 25%;
+  top: 24%;
+  width: 43%;
+  height: 57%;
+  z-index: 3;
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 300ms ease, filter 300ms ease;
+}
+#memory-network:hover { opacity: 0.9; }
+body.memory-window-open #memory-network { opacity: 0.14; filter: blur(0.5px); }
+#memory-network-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#memory-network-nodes { position: absolute; inset: 0; }
+
+.memory-network-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 54px;
+  height: 54px;
+  border: 1px solid rgba(242,198,109,0.3);
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
+  background:
+    radial-gradient(circle, rgba(89,210,230,0.18), transparent 56%),
+    rgba(7,13,25,0.2);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 30px rgba(242,198,109,0.08);
+  pointer-events: auto;
+}
+
+.achievement-trophy {
+  --achievement-fill: 0%;
+  appearance: none;
+  padding: 0;
+  cursor: pointer;
+  color: rgba(232,245,248,0.56);
+  transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+.achievement-trophy:hover,
+.achievement-trophy:focus-visible {
+  border-color: var(--p3r-cyan);
+  background: rgba(7,22,37,0.88);
+  box-shadow: 0 0 34px rgba(89,210,230,0.24), inset 0 0 14px rgba(89,210,230,0.1);
+  outline: none;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.achievement-trophy-art { position: absolute; left: 13px; top: 9px; width: 28px; height: 28px; }
+.achievement-trophy-art > svg,
+.achievement-trophy-fill,
+.achievement-trophy-fill svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.achievement-trophy-art path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.2;
+  stroke-linecap: square;
+  stroke-linejoin: bevel;
+}
+.achievement-trophy-fill {
+  color: var(--shokuhou-gold);
+  clip-path: inset(calc(100% - var(--achievement-fill)) 0 0 0);
+  transition: clip-path 600ms cubic-bezier(.2,.8,.2,1);
+  filter: drop-shadow(0 0 5px rgba(242,198,109,0.45));
+}
+.achievement-trophy-count {
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  transform: translateX(-50%);
+  color: rgba(255,249,231,0.62);
+  font: 800 7px/1 'Consolas', monospace;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+.achievement-trophy.is-complete { border-color: rgba(242,198,109,.78); background: rgba(75,50,14,.62); }
+.achievement-trophy.is-claimable { animation: achievement-trophy-claimable 1.45s ease-in-out infinite; }
+.achievement-trophy.is-claimed { box-shadow: 0 0 34px rgba(242,198,109,.28); }
+
+#memory-network.is-synchronized .memory-network-core {
+  animation: memory-core-sync 2.4s ease-out;
+}
+
+@keyframes memory-core-sync {
+  0%, 100% { box-shadow: 0 0 30px rgba(242,198,109,0.08); }
+  18% { color: #fff; background: rgba(242,198,109,0.86); box-shadow: 0 0 90px rgba(242,198,109,0.75); }
+  44% { background: rgba(89,210,230,0.52); box-shadow: 0 0 120px rgba(89,210,230,0.55); }
+}
+
+@keyframes achievement-trophy-claimable {
+  0%, 100% { box-shadow: 0 0 24px rgba(242,198,109,.2), inset 0 0 10px rgba(242,198,109,.08); }
+  50% { border-color: #fff1bc; box-shadow: 0 0 58px rgba(255,217,116,.72), inset 0 0 20px rgba(255,238,179,.28); }
+}
+
+.memory-node {
+  --node-index: '00';
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: rgba(255,249,231,0.72);
+  background: rgba(7,13,25,0.52);
+  border: 1px solid rgba(255,249,231,0.28);
+  transform: translate(-50%, -50%) rotate(30deg);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: width 180ms ease, height 180ms ease, color 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+.memory-node::before {
+  content: var(--node-index);
+  transform: rotate(-30deg);
+  font: 800 8px/1 'Consolas', monospace;
+}
+.memory-node::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 42px;
+  top: 7px;
+  min-width: max-content;
+  color: rgba(255,249,231,0.68);
+  font: 700 8px/1 'Consolas', monospace;
+  letter-spacing: 0.13em;
+  transform: rotate(-30deg) translateY(5px);
+  transform-origin: left center;
+  opacity: 0;
+  transition: opacity 160ms ease, transform 180ms ease;
+  pointer-events: none;
+}
+.memory-node:hover,
+.memory-node:focus-visible {
+  width: 42px;
+  height: 42px;
+  color: #fff;
+  background: rgba(7,22,37,0.88);
+  border-color: var(--p3r-cyan);
+  box-shadow: 0 0 22px rgba(89,210,230,0.2), inset 0 0 10px rgba(89,210,230,0.09);
+  outline: none;
+}
+.memory-node:hover::after,
+.memory-node:focus-visible::after { opacity: 1; transform: rotate(-30deg) translateY(0); }
+.memory-node.is-discovered {
+  color: var(--shokuhou-gold);
+  border-color: rgba(242,198,109,0.72);
+  background: rgba(75,50,14,0.52);
+}
+.memory-node.is-discovered::after { color: rgba(255,236,191,0.84); }
+.memory-node.is-selected {
+  width: 42px;
+  height: 42px;
+  color: #fff;
+  background: rgba(7,22,37,0.9);
+  border-color: var(--p3r-cyan);
+  box-shadow: 0 0 26px rgba(89,210,230,0.28), inset 0 0 11px rgba(89,210,230,0.1);
+}
+.memory-node.is-selected::after { opacity: 1; transform: rotate(-30deg) translateY(0); }
+.memory-node.is-targeted { animation: memory-target-pulse 720ms ease-in-out 3; }
+
+@keyframes memory-target-pulse {
+  50% { color: #06111e; background: var(--shokuhou-gold); box-shadow: 0 0 34px rgba(242,198,109,0.62); }
+}
+
+.memory-network-status {
+  position: absolute;
+  left: 3%;
+  bottom: 1%;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: rgba(255,249,231,0.48);
+  font: 700 8px/1 'Consolas', monospace;
+  letter-spacing: 0.15em;
+}
+.memory-network-status::before { content: ''; width: 34px; height: 1px; background: currentColor; }
+#memory-network-progress { color: var(--shokuhou-gold); }
+
+@media (max-width: 1100px) {
+  #memory-network { left: 27%; width: 40%; opacity: 0.38; }
+}
+@media (max-width: 760px) {
+  #memory-network { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .memory-node { transition-duration: 1ms; }
+  .achievement-trophy.is-claimable { animation: none; box-shadow: 0 0 42px rgba(242,198,109,.5); }
+}

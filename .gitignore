@@ -1,0 +1,25 @@
+node_modules/
+.env
+messages.txt
+.private/
+*.tmp
+*.log
+npm-debug.log*
+.DS_Store
+
+# Local creation sources and archives (not used by the production server)
+/壁纸/
+/个人主页/
+/可用动作/
+/vrm动画/
+/VRMA_MotionPack/
+/fm_vrma_motion_pack_01/
+/exports/
+/lab-patch/
+/动漫表.xlsx
+/*.zip
+/*.fbx
+
+# Third-party character assets are intentionally not redistributed.
+/shokuhou.vrm
+/assets/animations/character/

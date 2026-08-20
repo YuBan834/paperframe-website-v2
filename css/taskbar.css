@@ -1,0 +1,264 @@
+/* ═══════════════════════════════════════════════════════════════
+   Taskbar — embedded Academy City launcher strip
+   ═══════════════════════════════════════════════════════════════ */
+
+#taskbar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--taskbar-height);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(12px, 1.6vw, 28px);
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(4, 8, 16, 0.96), rgba(8, 13, 23, 0.9) 64%, rgba(8, 13, 23, 0.76)),
+    var(--taskbar-bg);
+  border-top: 1px solid rgba(255, 234, 190, 0.27);
+  box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+#taskbar::after {
+  content: 'SHOKUHOU // 05';
+  position: absolute;
+  right: 4.6vw;
+  top: 8px;
+  color: rgba(242, 198, 109, 0.32);
+  font: 700 9px/1 'Consolas', monospace;
+  letter-spacing: 0.2em;
+  pointer-events: none;
+}
+
+.taskbar-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  min-width: 0;
+}
+
+.taskbar-right { display: none; }
+
+.taskbar-divider {
+  width: 34px;
+  height: 1px;
+  margin: 0 3px;
+  background: linear-gradient(90deg, var(--shokuhou-gold), transparent);
+  opacity: 0.56;
+}
+
+.taskbar-start {
+  position: relative;
+  width: 46px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  clip-path: polygon(12px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  color: var(--shokuhou-gold);
+  background: rgba(242, 198, 109, 0.07);
+  border: 1px solid rgba(242, 198, 109, 0.18);
+  transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.taskbar-start::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 1px solid currentColor;
+  transform: rotate(45deg);
+  opacity: 0.5;
+}
+
+.start-icon { position: relative; z-index: 1; font-size: 15px; }
+
+.taskbar-start:hover,
+.taskbar-start.active {
+  color: #fff;
+  background: rgba(89, 210, 230, 0.13);
+  transform: translateY(-2px);
+}
+
+.taskbar-windows {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  min-width: 0;
+}
+
+.taskbar-window-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  max-width: 170px;
+  padding: 0 14px 0 12px;
+  overflow: hidden;
+  clip-path: polygon(7px 0, 100% 0, calc(100% - 7px) 100%, 0 100%);
+  border: 1px solid transparent;
+  color: rgba(224, 231, 242, 0.8);
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 11px;
+  white-space: nowrap;
+  transition: all 160ms ease;
+}
+
+.taskbar-window-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.taskbar-window-btn.active {
+  color: var(--p3r-cyan);
+  background: rgba(89, 210, 230, 0.1);
+  border-color: rgba(89, 210, 230, 0.3);
+}
+
+.taskbar-window-btn.active::after {
+  content: '';
+  position: absolute;
+  left: 9px;
+  right: 13px;
+  bottom: 2px;
+  height: 2px;
+  background: var(--p3r-cyan);
+  box-shadow: 0 0 10px rgba(89, 210, 230, 0.7);
+}
+
+/* ─── Start Menu ─── */
+.start-menu {
+  position: absolute;
+  left: clamp(12px, 1.6vw, 28px);
+  bottom: calc(var(--taskbar-height) + 6px);
+  width: 292px;
+  z-index: 8;
+  overflow: hidden;
+  background: rgba(5, 10, 19, 0.97);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(242, 198, 109, 0.3);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.6);
+  transform-origin: bottom left;
+  transition: opacity 180ms ease, transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.start-menu.hidden {
+  opacity: 0;
+  transform: translateY(12px) scale(0.97);
+  pointer-events: none;
+}
+
+.start-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: linear-gradient(90deg, rgba(242, 198, 109, 0.1), transparent);
+  border-bottom: 1px solid rgba(242, 198, 109, 0.15);
+}
+
+#start-avatar {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border: 1px solid rgba(242, 198, 109, 0.45);
+  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
+}
+
+#start-nickname { color: #fff; font-size: 13px; font-weight: 600; }
+.start-menu-items { padding: 7px; }
+
+.start-menu-items .menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  color: var(--start-menu-text);
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.start-menu-items .menu-item:hover {
+  color: #fff;
+  background: rgba(89, 210, 230, 0.09);
+  border-left-color: var(--p3r-cyan);
+}
+
+.start-menu-items .sm-icon {
+  color: var(--shokuhou-gold);
+  font: 700 9px/1 'Consolas', monospace;
+}
+
+.start-menu-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 15px;
+  border-top: 1px solid rgba(242, 198, 109, 0.13);
+  color: var(--window-text-secondary);
+  font-size: 10px;
+}
+
+#start-utilities {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 3px 0;
+}
+
+.su-btn {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  color: var(--taskbar-text);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 11px;
+}
+
+.su-btn:hover { color: var(--p3r-cyan); background: rgba(89, 210, 230, 0.1); }
+#su-clock { color: #fff; font: 12px/1 'Consolas', monospace; letter-spacing: 0.05em; }
+#egg-counter {
+  align-self: flex-start;
+  padding: 3px 0;
+  color: var(--shokuhou-gold);
+  background: transparent;
+  border: 0;
+  font-size: 10px;
+}
+#egg-counter:hover { color: #fff; }
+
+.taskbar-preview {
+  position: fixed;
+  bottom: calc(14vh + var(--taskbar-height));
+  z-index: 100;
+  min-width: 200px;
+  padding: 11px 14px;
+  color: #fff;
+  background: rgba(5, 10, 19, 0.97);
+  border: 1px solid rgba(89, 210, 230, 0.35);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+  font-size: 11px;
+  text-align: center;
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  #taskbar { padding-left: 8px; }
+  #taskbar::after, .taskbar-divider { display: none; }
+  .taskbar-window-btn { max-width: 96px; padding-inline: 8px; }
+  .start-menu { left: 8px; width: min(292px, calc(100vw - 24px)); }
+}

@@ -1,0 +1,106 @@
+/* Live field console fills the reflective floor with useful session state. */
+#field-console {
+  position: absolute;
+  left: clamp(24px, 3vw, 58px);
+  right: 27vw;
+  top: clamp(38px, 5vh, 52px);
+  bottom: 10px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(250px, 1.2fr) minmax(280px, 1.35fr) minmax(190px, 0.85fr);
+  gap: clamp(8px, 1vw, 18px);
+  pointer-events: auto;
+}
+
+.field-cell {
+  position: relative;
+  min-width: 0;
+  padding: 10px 14px;
+  overflow: hidden;
+  color: rgba(222, 232, 246, 0.76);
+  background: linear-gradient(105deg, rgba(9, 18, 33, 0.74), rgba(10, 24, 42, 0.36));
+  border-top: 1px solid rgba(89, 210, 230, 0.24);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+
+.field-cell::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 34px;
+  height: 1px;
+  background: var(--shokuhou-gold);
+  opacity: 0.55;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+  color: rgba(89, 210, 230, 0.68);
+  font: 700 clamp(7px, 0.52vw, 9px)/1 'Consolas', monospace;
+  letter-spacing: 0.16em;
+}
+
+.field-label span { color: var(--shokuhou-gold); }
+.field-objective strong { display: block; color: #f5f0e8; font-size: clamp(10px, 0.78vw, 13px); }
+.field-objective p {
+  margin: 5px 0 8px;
+  overflow: hidden;
+  color: rgba(208, 218, 234, 0.57);
+  font-size: clamp(8px, 0.62vw, 10px);
+  line-height: 1.45;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.field-actions { display: flex; gap: 6px; }
+.field-actions button {
+  padding: 5px 9px;
+  color: rgba(235, 241, 249, 0.72);
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.08);
+  font: 700 8px/1 'Consolas', monospace;
+  letter-spacing: 0.08em;
+}
+.field-actions button:hover:not(:disabled) { color: #06111e; background: var(--p3r-cyan); border-color: var(--p3r-cyan); }
+.field-actions button:disabled { opacity: 0.3; cursor: default; }
+
+#field-trace-list { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+#field-trace-list li {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 8px;
+  font: 600 clamp(7px, 0.58vw, 9px)/1.25 'Consolas', monospace;
+  letter-spacing: 0.05em;
+}
+#field-trace-list time { color: rgba(242,198,109,0.62); }
+#field-trace-list span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+.field-vitals dl { display: grid; gap: 6px; margin: 0; }
+.field-vitals dl div { display: flex; justify-content: space-between; gap: 10px; }
+.field-vitals dt { color: rgba(206,218,235,0.44); font: 600 8px/1 'Consolas', monospace; }
+.field-vitals dd { color: var(--shokuhou-gold); font: 700 8px/1 'Consolas', monospace; text-align: right; }
+
+@media (max-width: 1100px) {
+  #field-console { right: 31vw; grid-template-columns: 1.2fr 1fr; }
+  .field-vitals { display: none; }
+}
+
+@media (max-height: 760px) and (min-width: 761px) {
+  #field-console { top: 34px; bottom: 4px; }
+  .field-cell { padding: 6px 10px; }
+  .field-label { margin-bottom: 4px; }
+  .field-objective p { display: none; }
+  .field-actions { margin-top: 5px; }
+  .field-actions button { padding: 3px 7px; }
+  #field-trace-list { gap: 3px; }
+  #field-trace-list li:nth-child(n + 3) { display: none; }
+  .field-vitals dl { gap: 3px; }
+}
+
+@media (max-width: 760px) {
+  #field-console { display: none; }
+}

@@ -1,0 +1,487 @@
+/* ═══════════════════════════════════════════════════════════════
+   Shokuhou Misaki — primary foreground visual
+   Feet sit on the Academy panel horizon; the reflection continues
+   into the dark floor below it.
+   ═══════════════════════════════════════════════════════════════ */
+
+#character-container {
+  position: fixed;
+  right: -0.5vw;
+  bottom: 12vh;
+  width: min(44vw, 760px);
+  height: 86vh;
+  z-index: 70;
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(-14px 22px 24px rgba(0, 0, 0, 0.2));
+  transition:
+    transform 460ms cubic-bezier(0.2, 0.85, 0.25, 1),
+    opacity 320ms ease,
+    filter 320ms ease;
+}
+
+#character-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+
+#character-container.is-ready #character-canvas { opacity: 1; }
+#character-container.is-loading { cursor: progress; }
+#character-container.is-degraded #character-canvas { opacity: 0.35; }
+
+/* When a focused viewport window enters the character's side, she
+   yields the interaction plane instead of permanently blocking it. */
+body.character-yielding #character-container {
+  z-index: 15;
+  opacity: 0.46;
+  transform: translateX(12%);
+  filter: saturate(0.72) brightness(0.7) blur(0.7px);
+}
+
+#character-reflection-frame {
+  position: absolute;
+  left: 0;
+  top: 99.2%;
+  width: 100%;
+  height: 12%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#character-reflection-frame::after {
+  content: '';
+  position: absolute;
+  left: 27%;
+  top: -3px;
+  width: 46%;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(242,198,109,0.18), rgba(89,210,230,0.075) 42%, rgba(5,10,19,0.16) 60%, transparent 76%);
+  filter: blur(4px);
+}
+
+#character-reflection {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 294%;
+  display: block;
+  opacity: 0;
+  transform: scaleY(-1) skewX(-1deg);
+  filter: blur(1.15px) saturate(0.58) brightness(0.74);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: opacity 500ms ease 180ms;
+}
+
+#character-container.is-ready #character-reflection.is-ready { opacity: 0.3; }
+#character-reflection.is-disabled { display: none; }
+
+#character-container::after {
+  content: '';
+  position: absolute;
+  left: auto;
+  right: 7%;
+  top: calc(100% + 1.4vh);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(89, 210, 230, 0.2), transparent);
+  box-shadow: 0 0 14px rgba(89, 210, 230, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms ease 220ms;
+}
+
+#character-container.is-ready::after { opacity: 1; }
+
+.chat-bubble {
+  position: absolute;
+  left: -10%;
+  bottom: 72%;
+  min-width: 210px;
+  max-width: 300px;
+  padding: 13px 16px;
+  color: var(--chat-bubble-text);
+  background: rgba(5, 10, 19, 0.95);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(242, 198, 109, 0.36);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 11px 100%, 0 calc(100% - 11px));
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), inset 2px 0 rgba(89, 210, 230, 0.35);
+  font-size: 12px;
+  line-height: 1.65;
+  z-index: 6;
+  pointer-events: auto;
+}
+
+.chat-bubble::before {
+  content: 'MENTAL LINK';
+  display: block;
+  margin-bottom: 6px;
+  color: var(--p3r-cyan);
+  font: 700 8px/1 'Consolas', monospace;
+  letter-spacing: 0.18em;
+}
+
+.chat-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 36px;
+  border: 7px solid transparent;
+  border-top-color: rgba(242, 198, 109, 0.4);
+}
+
+.chat-bubble.hidden { display: none; }
+#chat-text { margin: 0; word-break: break-word; }
+
+.chat-input-area {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(242, 198, 109, 0.16);
+}
+.chat-input-area.hidden { display: none; }
+
+#chat-input {
+  flex: 1;
+  min-width: 120px;
+  padding: 7px 9px;
+  color: var(--chat-bubble-text);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(89, 210, 230, 0.2);
+  font-size: 11px;
+}
+#chat-input::placeholder { color: var(--window-text-secondary); }
+
+#chat-send {
+  padding: 7px 11px;
+  color: var(--shokuhou-gold);
+  background: rgba(242, 198, 109, 0.09);
+  border: 1px solid rgba(242, 198, 109, 0.25);
+  font-size: 11px;
+  transition: all var(--transition-fast);
+}
+#chat-send:hover { color: #fff; background: rgba(242, 198, 109, 0.2); }
+
+@keyframes character-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.chat-bubble:not(.hidden) { animation: bubble-pop 260ms cubic-bezier(0.22, 0.9, 0.28, 1) forwards; }
+@keyframes bubble-pop {
+  from { opacity: 0; transform: translate(-9px, 8px) scale(0.95); }
+  to { opacity: 1; transform: translate(0, 0) scale(1); }
+}
+
+/* ─── Mental Link: dedicated character conversation channel ─── */
+#mental-link-launcher {
+  position: absolute;
+  left: 15%;
+  bottom: 29%;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 11px 7px 8px;
+  color: rgba(226, 241, 249, 0.78);
+  background: rgba(5, 10, 19, 0.76);
+  border: 1px solid rgba(89, 210, 230, 0.23);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  font: 700 8px/1 'Consolas', monospace;
+  letter-spacing: 0.13em;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 220ms ease, transform 220ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+#character-container.is-ready #mental-link-launcher { opacity: 0.72; transform: none; }
+body.mental-link-open #character-container #mental-link-launcher { opacity: 0; pointer-events: none; }
+#mental-link-launcher:hover,
+#mental-link-launcher:focus-visible {
+  color: #fff;
+  border-color: rgba(89, 210, 230, 0.72);
+  opacity: 1 !important;
+}
+
+.mental-link-signal {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--p3r-cyan);
+  box-shadow: 0 0 0 0 rgba(89, 210, 230, 0.5);
+  animation: mental-signal 2s ease-out infinite;
+}
+
+@keyframes mental-signal {
+  60%, 100% { box-shadow: 0 0 0 8px rgba(89, 210, 230, 0); }
+}
+
+#mental-link-panel {
+  position: fixed;
+  right: clamp(430px, 34vw, 690px);
+  bottom: max(13vh, 104px);
+  z-index: 88;
+  width: min(430px, calc(100vw - 36px));
+  height: min(610px, 68vh);
+  display: grid;
+  grid-template-rows: auto 1fr auto auto auto;
+  color: #e3ebf1;
+  background:
+    linear-gradient(130deg, rgba(255,255,255,0.035), transparent 24%),
+    rgba(5, 10, 19, 0.965);
+  border: 1px solid rgba(89, 210, 230, 0.26);
+  border-left: 3px solid var(--shokuhou-gold);
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.58), inset 0 1px rgba(255,255,255,0.04);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(26px) skewY(-0.35deg);
+  transform-origin: right bottom;
+  transition: opacity 240ms ease, transform 320ms cubic-bezier(0.18,0.86,0.24,1), visibility 240ms;
+}
+
+#mental-link-panel.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+#mental-link-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background: repeating-linear-gradient(180deg, transparent 0 3px, rgba(89,210,230,0.08) 4px);
+}
+
+.mental-link-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 1fr auto 30px;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(89,210,230,0.18);
+  background: rgba(2, 7, 14, 0.78);
+}
+
+.mental-link-index {
+  color: #07101b;
+  background: var(--shokuhou-gold);
+  padding: 13px 0;
+  text-align: center;
+  font: 800 13px/1 'Consolas', monospace;
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
+}
+
+.mental-link-kicker {
+  margin: 0 0 5px;
+  color: var(--p3r-cyan);
+  font: 700 8px/1 'Consolas', monospace;
+  letter-spacing: 0.14em;
+}
+
+.mental-link-header h2 { margin: 0; font-size: 17px; letter-spacing: 0.08em; }
+.mental-link-status {
+  padding: 5px 7px;
+  color: var(--shokuhou-gold);
+  border: 1px solid rgba(242,198,109,0.2);
+  font: 700 8px/1 'Consolas', monospace;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.mental-link-status[data-state='online'] { color: #75e7bd; border-color: rgba(117,231,189,0.3); }
+.mental-link-status[data-state='busy'] { color: var(--p3r-cyan); }
+.mental-link-status[data-state='thinking'] { color: #c7a8ff; border-color: rgba(199,168,255,0.38); }
+.mental-link-status[data-state='responding'] { color: var(--p3r-cyan); border-color: rgba(89,210,230,0.38); }
+.mental-link-status[data-state='error'] { color: #ff8b8b; }
+
+#mental-link-close {
+  width: 28px;
+  height: 28px;
+  color: #8796a5;
+  background: transparent;
+  border: 0;
+  font-size: 22px;
+  cursor: pointer;
+}
+#mental-link-close:hover { color: #fff; }
+
+.mental-link-messages {
+  position: relative;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 18px 16px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(89,210,230,0.3) transparent;
+}
+
+.mental-message {
+  position: relative;
+  width: fit-content;
+  max-width: 88%;
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.mental-message::before {
+  display: block;
+  margin-bottom: 5px;
+  font: 700 8px/1 'Consolas', monospace;
+  letter-spacing: 0.13em;
+}
+.mental-message.assistant {
+  background: rgba(89,210,230,0.055);
+  border-left-color: var(--p3r-cyan);
+  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+}
+.mental-message.assistant::before { content: 'SHOKUHOU // 05'; color: var(--p3r-cyan); }
+.mental-message.user {
+  margin-left: auto;
+  background: rgba(242,198,109,0.075);
+  border-right-color: var(--shokuhou-gold);
+  text-align: left;
+  clip-path: polygon(9px 0, 100% 0, 100% 100%, 0 100%, 0 9px);
+}
+.mental-message.user::before { content: 'VISITOR'; color: var(--shokuhou-gold); }
+.mental-message.is-typing::after { content: ' ▋'; color: var(--p3r-cyan); animation: mental-caret 0.7s steps(1) infinite; }
+@keyframes mental-caret { 50% { opacity: 0; } }
+.mental-message.is-thinking {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #c9b4ec;
+  border-left-color: #b796ef;
+}
+.mental-message.is-thinking::before { content: 'MENTAL TRACE'; color: #b796ef; margin: 0 7px 0 0; }
+.mental-message.is-thinking i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: mental-thinking 1.05s ease-in-out infinite;
+}
+.mental-message.is-thinking i:nth-of-type(2) { animation-delay: 0.14s; }
+.mental-message.is-thinking i:nth-of-type(3) { animation-delay: 0.28s; }
+@keyframes mental-thinking { 0%, 60%, 100% { opacity: 0.25; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+
+.mental-link-suggestions {
+  display: flex;
+  gap: 6px;
+  padding: 0 16px 10px;
+  overflow-x: auto;
+}
+.mental-link-suggestions button {
+  flex: 0 0 auto;
+  padding: 6px 8px;
+  color: #9aabba;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 10px;
+  cursor: pointer;
+}
+.mental-link-suggestions button:hover { color: #fff; border-color: rgba(89,210,230,0.35); }
+
+.mental-link-form {
+  display: grid;
+  grid-template-columns: 1fr 104px;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(89,210,230,0.15);
+  background: rgba(2,7,14,0.48);
+}
+.mental-link-form label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+#mental-link-input {
+  min-height: 50px;
+  resize: none;
+  padding: 9px 10px;
+  color: #eef5f8;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(89,210,230,0.2);
+  outline: none;
+  font: 12px/1.55 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+#mental-link-input:focus { border-color: rgba(89,210,230,0.68); box-shadow: inset 2px 0 var(--p3r-cyan); }
+#mental-link-send {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  color: #06101a;
+  background: var(--p3r-cyan);
+  border: 0;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  font: 800 9px/1 'Consolas', monospace;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+#mental-link-send:disabled { opacity: 0.42; cursor: wait; }
+
+#mental-link-panel footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px 10px;
+  color: #596a79;
+  font: 700 8px/1 'Consolas', monospace;
+  letter-spacing: 0.09em;
+}
+#mental-link-reset { padding: 0; color: inherit; background: none; border: 0; font: inherit; cursor: pointer; }
+#mental-link-reset:hover { color: var(--shokuhou-gold); }
+
+@media (max-width: 1100px) {
+  #character-container { width: min(48vw, 650px); right: -3vw; }
+  .chat-bubble { left: auto; right: 68%; }
+  #mental-link-panel { right: 27vw; }
+}
+
+body.is-immersive #character-container {
+  right: -1.5vw;
+  bottom: 11.5vh;
+  width: min(42vw, 720px);
+  height: 86vh;
+}
+
+@media (max-width: 760px) {
+  #character-container {
+    right: -10vw;
+    bottom: 15vh;
+    width: 52vw;
+    height: 67vh;
+    opacity: 0.76;
+  }
+  body.character-yielding #character-container { opacity: 0.1; transform: translateX(24%); }
+  .chat-bubble { left: -6%; right: auto; min-width: 190px; max-width: 240px; }
+  #mental-link-launcher { left: 0; bottom: 27%; }
+  #mental-link-panel {
+    right: 12px;
+    bottom: 11vh;
+    height: min(640px, 76vh);
+  }
+  body.is-immersive #character-container {
+    right: -11vw;
+    bottom: 15vh;
+    width: 54vw;
+    height: 68vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mental-link-signal,
+  .mental-message.is-typing::after { animation: none; }
+  #mental-link-panel { transition-duration: 1ms; }
+}

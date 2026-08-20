@@ -1,0 +1,43 @@
+{
+  "avatar": "assets/images/avatar-paperframe.png",
+  "nickname": "开发者纸帧",
+  "nicknameEn": "PaperFrame",
+  "ip": "云南",
+  "identity": "挂壁高中生",
+  "identityEn": "Student · Independent Developer",
+  "age": 16,
+  "gender": "男",
+  "genderEn": "Male",
+  "bio": "哈喽哈喽！欢迎来到我的网站！(*´∀`)~♥希望你能喜欢这里！(｡･ω･｡)ﾉ♡我是一名全栈开发者,大概具体就是玩这些吧,也爱搞点二次元，如果你感兴趣，或者想要联系我，欢迎点击旁边的邮件图标，或者直接跳转到社交平台也可以，欢迎各位大佬扩列！(＾▽＾)",
+  "bioEn": "I'm PaperFrame, a high school student still learning by building. This is not a standard resume, but a personal space where animation, games, visual design and code gradually become real projects.",
+  "languages": [
+    { "name": "HTML", "color": "#e86b3c" },
+    { "name": "CSS", "color": "#56a8e8" },
+    { "name": "JavaScript", "color": "#f7df1e" },
+    { "name": "Node.js", "color": "#74b85a" },
+    { "name": "Python", "color": "#5da7d8" },
+    { "name": "Godot", "color": "#70bafa" },
+    { "name": "Electron", "color": "#72d5e8" },
+    { "name": "Three.js / VRM", "color": "#9d86ff" },
+    { "name": "C", "color": "#8ca6c9" },
+    { "name": "Assembly", "color": "#ef936e" }
+  ],
+  "orbitSkills": [
+    { "name": "HTML", "short": "HTML", "color": "#e86b3c", "stage": "主要使用", "stageEn": "PRIMARY", "note": "页面结构与内容组织", "noteEn": "Page structure and content organization" },
+    { "name": "CSS", "short": "CSS", "color": "#56a8e8", "stage": "主要使用", "stageEn": "PRIMARY", "note": "视觉设计、动效与响应式布局", "noteEn": "Visual design, motion and responsive layouts" },
+    { "name": "JavaScript", "short": "JS", "color": "#f7df1e", "stage": "主要使用", "stageEn": "PRIMARY", "note": "网页交互、状态和界面逻辑", "noteEn": "Interaction, state and interface logic" },
+    { "name": "Node.js", "short": "NODE", "color": "#74b85a", "stage": "项目实践", "stageEn": "PROJECT", "note": "本地服务、接口与开发工具", "noteEn": "Local services, APIs and development tools" },
+    { "name": "Python", "short": "PY", "color": "#5da7d8", "stage": "项目实践", "stageEn": "PROJECT", "note": "自动化脚本和小型工具", "noteEn": "Automation scripts and small tools" },
+    { "name": "Godot", "short": "GD", "color": "#70bafa", "stage": "项目实践", "stageEn": "PROJECT", "note": "游戏原型与交互实验", "noteEn": "Game prototypes and interaction experiments" },
+    { "name": "Electron", "short": "EL", "color": "#72d5e8", "stage": "项目实践", "stageEn": "PROJECT", "note": "桌面应用与本地工具封装", "noteEn": "Desktop applications and local tool packaging" },
+    { "name": "Three.js / VRM", "short": "3D", "color": "#9d86ff", "stage": "实验方向", "stageEn": "EXPERIMENT", "note": "网页三维角色与动作系统", "noteEn": "Web characters and motion systems" },
+    { "name": "C语言", "short": "C", "color": "#8ca6c9", "stage": "正在学习", "stageEn": "LEARNING", "note": "程序设计与底层基础", "noteEn": "Programming and low-level foundations" },
+    { "name": "汇编语言", "short": "ASM", "color": "#ef936e", "stage": "入门探索", "stageEn": "EXPLORING", "note": "理解指令、寄存器与程序运行方式", "noteEn": "Instructions, registers and program execution" }
+  ],
+  "skills": [],
+  "socials": [
+    { "platform": "GitHub", "url": "https://github.com/YuBan834", "icon": "GH", "theme": "github", "note": "代码和项目" },
+    { "platform": "哔哩哔哩", "url": "https://space.bilibili.com/3546911965448476", "icon": "哔", "theme": "bilibili", "note": "我的 B 站主页" },
+    { "platform": "抖音", "url": "https://www.douyin.com/user/MS4wLjABAAAAu8CKyjgd-wWQBb5cLemCVqC3nYjhwT-n7_51AyE8DTTiPIBF5FgNrzuaY-51GGhw", "icon": "♪", "theme": "douyin", "note": "我的抖音主页" }
+  ]
+}

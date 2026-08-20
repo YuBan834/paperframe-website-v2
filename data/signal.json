@@ -1,0 +1,36 @@
+{
+  "updated": "2026-08-20",
+  "status": "ONLINE",
+  "headline": "让完成度变成真正属于自己的表达。",
+  "headlineEn": "Turning a finished interface into something unmistakably personal.",
+  "signals": [
+    {
+      "code": "BUILD",
+      "label": "正在开发",
+      "labelEn": "Building",
+      "value": "神秘的新项目",
+      "detail": "还不能说，先偷偷做着。"
+    },
+    {
+      "code": "PLAY",
+      "label": "最近在玩",
+      "labelEn": "Playing",
+      "value": "白日梦的构想图",
+      "detail": "仍在继续，第二部拉普拉斯社的作品。"
+    },
+    {
+      "code": "WATCH",
+      "label": "最近在看",
+      "labelEn": "Watching",
+      "value": "Love Live!",
+      "detail": "最近正在看，歌也很好听。"
+    },
+    {
+      "code": "LEARN",
+      "label": "正在学习",
+      "labelEn": "Learning",
+      "value": "高中知识",
+      "detail": "先把学校里的东西学明白。"
+    }
+  ]
+}

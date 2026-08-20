@@ -1,0 +1,59 @@
+#ticket-verifier-panel {
+  position: fixed;
+  z-index: 1320;
+  left: 50%;
+  top: 50%;
+  width: min(540px, calc(100vw - 30px));
+  color: #edf2f5;
+  background: rgba(6,15,27,.96);
+  border: 1px solid rgba(89,210,230,.28);
+  box-shadow: 0 28px 90px rgba(0,0,0,.54);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -46%) scale(.97);
+  transition: opacity 180ms ease, transform 240ms cubic-bezier(.2,.8,.2,1);
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+}
+#ticket-verifier-panel.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+#ticket-verifier-panel::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .25; background: repeating-linear-gradient(90deg, transparent 0 53px, rgba(89,210,230,.06) 54px); }
+.ticket-verifier-header { position: relative; display: grid; grid-template-columns: 42px 1fr auto 28px; gap: 12px; align-items: center; padding: 14px 16px; border-bottom: 1px solid rgba(89,210,230,.16); }
+.ticket-verifier-index { display: grid; place-items: center; height: 36px; color: #08121d; background: var(--shokuhou-gold); font: 900 11px/1 Consolas, monospace; }
+.ticket-verifier-header p, .ticket-verifier-header h2 { margin: 0; }
+.ticket-verifier-header p { color: var(--p3r-cyan); font: 700 7px/1 Consolas, monospace; letter-spacing: .16em; }
+.ticket-verifier-header h2 { margin-top: 5px; font-size: 16px; }
+#ticket-verifier-status { color: rgba(220,230,238,.42); font: 800 8px/1 Consolas, monospace; letter-spacing: .13em; }
+#ticket-verifier-panel[data-state='valid'] #ticket-verifier-status { color: #75e7bd; }
+#ticket-verifier-panel[data-state='invalid'] #ticket-verifier-status { color: #ef8d82; }
+#ticket-verifier-close { color: #8999a8; background: none; border: 0; font-size: 20px; cursor: pointer; }
+.ticket-verifier-body { position: relative; padding: 22px; }
+.ticket-verifier-copy { margin: 0 0 17px; color: rgba(220,230,238,.52); font-size: 11px; line-height: 1.7; }
+.ticket-verifier-import { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.ticket-verifier-import button { min-height: 38px; padding: 0 14px; color: #d9f6fb; background: rgba(89,210,230,.075); border: 1px solid rgba(89,210,230,.3); font: 800 8px/1 Consolas, monospace; letter-spacing: .08em; cursor: pointer; transition: background 160ms ease, border-color 160ms ease; }
+.ticket-verifier-import button:hover { background: rgba(89,210,230,.14); border-color: rgba(89,210,230,.58); }
+.ticket-verifier-import button span { margin-left: 10px; color: var(--shokuhou-gold); }
+.ticket-verifier-import small { color: rgba(220,230,238,.3); font: 700 7px/1.4 Consolas, monospace; letter-spacing: .08em; }
+#ticket-verifier-form { display: grid; grid-template-columns: 1fr 112px; }
+#ticket-verifier-input { min-width: 0; padding: 13px; color: #fff; background: rgba(255,255,255,.035); border: 1px solid rgba(89,210,230,.25); outline: 0; font: 800 15px/1 Consolas, monospace; letter-spacing: .13em; text-transform: uppercase; }
+#ticket-verifier-input:focus { border-color: var(--p3r-cyan); box-shadow: inset 3px 0 var(--p3r-cyan); }
+#ticket-verifier-form button { color: #06101a; background: var(--p3r-cyan); border: 0; font: 900 9px/1 Consolas, monospace; cursor: pointer; }
+#ticket-verifier-result { min-height: 108px; margin-top: 18px; padding: 16px; background: rgba(255,255,255,.025); border-left: 2px solid rgba(255,255,255,.1); }
+#ticket-verifier-panel[data-state='valid'] #ticket-verifier-result { border-left-color: #75e7bd; }
+#ticket-verifier-panel[data-state='invalid'] #ticket-verifier-result { border-left-color: #ef8d82; }
+#ticket-verifier-result > p { margin: 0; color: rgba(220,230,238,.5); font-size: 10px; line-height: 1.7; }
+.ticket-verifier-verdict { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 15px; }
+.ticket-verifier-verdict span { color: #75e7bd; font: 800 8px/1 Consolas, monospace; letter-spacing: .15em; }
+.ticket-verifier-verdict strong { color: #fff; font: 900 20px/1 Consolas, monospace; }
+#ticket-verifier-panel[data-state='invalid'] .ticket-verifier-verdict span { color: #ef8d82; }
+#ticket-verifier-result dl { display: grid; grid-template-columns: 1fr 1fr; gap: 13px 20px; margin: 0; }
+#ticket-verifier-result dt { color: rgba(220,230,238,.3); font: 700 7px/1 Consolas, monospace; letter-spacing: .13em; }
+#ticket-verifier-result dd { margin: 5px 0 0; color: rgba(240,244,246,.75); font-size: 10px; word-break: break-all; }
+body.ticket-verifier-open::after { content: ''; position: fixed; z-index: 1310; inset: 0; background: rgba(2,7,13,.54); backdrop-filter: blur(3px); }
+@media (max-width: 560px) {
+  .ticket-verifier-header { grid-template-columns: 36px 1fr 25px; }
+  #ticket-verifier-status { display: none; }
+  #ticket-verifier-form { grid-template-columns: 1fr; gap: 7px; }
+  .ticket-verifier-import { align-items: stretch; flex-direction: column; gap: 7px; }
+  .ticket-verifier-import small { padding-left: 2px; }
+  #ticket-verifier-form button { min-height: 38px; }
+  #ticket-verifier-result dl { grid-template-columns: 1fr; }
+}
